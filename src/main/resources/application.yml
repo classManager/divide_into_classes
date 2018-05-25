@@ -1,0 +1,62 @@
+server:
+  port: 8081
+
+log:
+  path: ./logs
+
+# 启动项目mvn spring-boot:run
+
+# 公共配置
+# 默认的profile为dev，其他环境通过指定启动参数使用不同的profile，比如：
+# 测试环境：java -jar xxx.jar --spring.profiles.active=test
+# 生产环境：java -jar xxx.jar --spring.profiles.active=prod
+spring:
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  typeAliasePackage: com.baidu.domain
+# shutdown的默认url为host:port/shutdown，当需要停止服务时，向服务器post该请求即可，如：
+# curl -X POST host:port/shutdown
+# 将得到形如{"message":"Shutting down, bye..."}的响应
+endpoints:
+  shutdown:
+    #启用shutdown
+    enabled: true
+    #启用密码验证
+    sensitive: false
+    #指定shutdown endpoint的路径
+    path: /customShutdownPath
+security:
+  user:
+    name: admin
+    password: secret
+management:
+  #指定管理端口和IP
+  address: 127.0.0.1
+  port: 8010
+  security:
+    #角色
+    roles: SUPERUSER
+---
+spring:
+  profiles: dev
+  session:
+    store-type: none
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/divide_into_classes?useUnicode=true&characterEncoding=utf8&autoReconnect=true&autoReconnectForPools=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+thirdparty:
+  org:
+    tokenURL: https://127.0.0.1

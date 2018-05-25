@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.dao.ScoreDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.baidu.domain.ScoreDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scoreId" property="scoreid" jdbcType="VARCHAR" />
+    <result column="detailId" property="detailid" jdbcType="VARCHAR" />
+    <result column="schoolId" property="schoolid" jdbcType="INTEGER" />
+    <result column="studentId" property="studentid" jdbcType="BIGINT" />
+    <result column="yuWenScore" property="yuwenscore" jdbcType="DOUBLE" />
+    <result column="shuXueScore" property="shuxuescore" jdbcType="DOUBLE" />
+    <result column="yingYuScore" property="yingyuscore" jdbcType="DOUBLE" />
+    <result column="wuLiScore" property="wuliscore" jdbcType="DOUBLE" />
+    <result column="huaXueScore" property="huaxuescore" jdbcType="DOUBLE" />
+    <result column="shengWuScore" property="shengwuscore" jdbcType="DOUBLE" />
+    <result column="zhengZhiScore" property="zhengzhiscore" jdbcType="DOUBLE" />
+    <result column="diLiScore" property="diliscore" jdbcType="DOUBLE" />
+    <result column="liShiScore" property="lishiscore" jdbcType="DOUBLE" />
+    <result column="jiShuScore" property="jishuscore" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="BIGINT" />
+    <result column="lastModifier" property="lastmodifier" jdbcType="VARCHAR" />
+    <result column="lastModDate" property="lastmoddate" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, scoreId, detailId, schoolId, studentId, yuWenScore, shuXueScore, yingYuScore, 
+    wuLiScore, huaXueScore, shengWuScore, zhengZhiScore, diLiScore, liShiScore, jiShuScore, 
+    remark, status, publisher, createDate, lastModifier, lastModDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.baidu.domain.ScoreDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from score_score_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from score_score_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from score_score_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.baidu.domain.ScoreDetail" >
+    insert into score_score_detail (id, scoreId, detailId, 
+      schoolId, studentId, yuWenScore, 
+      shuXueScore, yingYuScore, wuLiScore, 
+      huaXueScore, shengWuScore, zhengZhiScore, 
+      diLiScore, liShiScore, jiShuScore, 
+      remark, status, publisher, 
+      createDate, lastModifier, lastModDate
+      )
+    values (#{id,jdbcType=BIGINT}, #{scoreid,jdbcType=VARCHAR}, #{detailid,jdbcType=VARCHAR}, 
+      #{schoolid,jdbcType=INTEGER}, #{studentid,jdbcType=BIGINT}, #{yuwenscore,jdbcType=DOUBLE}, 
+      #{shuxuescore,jdbcType=DOUBLE}, #{yingyuscore,jdbcType=DOUBLE}, #{wuliscore,jdbcType=DOUBLE}, 
+      #{huaxuescore,jdbcType=DOUBLE}, #{shengwuscore,jdbcType=DOUBLE}, #{zhengzhiscore,jdbcType=DOUBLE}, 
+      #{diliscore,jdbcType=DOUBLE}, #{lishiscore,jdbcType=DOUBLE}, #{jishuscore,jdbcType=DOUBLE}, 
+      #{remark,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{publisher,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=BIGINT}, #{lastmodifier,jdbcType=VARCHAR}, #{lastmoddate,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.baidu.domain.ScoreDetail" >
+    insert into score_score_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scoreid != null" >
+        scoreId,
+      </if>
+      <if test="detailid != null" >
+        detailId,
+      </if>
+      <if test="schoolid != null" >
+        schoolId,
+      </if>
+      <if test="studentid != null" >
+        studentId,
+      </if>
+      <if test="yuwenscore != null" >
+        yuWenScore,
+      </if>
+      <if test="shuxuescore != null" >
+        shuXueScore,
+      </if>
+      <if test="yingyuscore != null" >
+        yingYuScore,
+      </if>
+      <if test="wuliscore != null" >
+        wuLiScore,
+      </if>
+      <if test="huaxuescore != null" >
+        huaXueScore,
+      </if>
+      <if test="shengwuscore != null" >
+        shengWuScore,
+      </if>
+      <if test="zhengzhiscore != null" >
+        zhengZhiScore,
+      </if>
+      <if test="diliscore != null" >
+        diLiScore,
+      </if>
+      <if test="lishiscore != null" >
+        liShiScore,
+      </if>
+      <if test="jishuscore != null" >
+        jiShuScore,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="lastmodifier != null" >
+        lastModifier,
+      </if>
+      <if test="lastmoddate != null" >
+        lastModDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="scoreid != null" >
+        #{scoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="detailid != null" >
+        #{detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=BIGINT},
+      </if>
+      <if test="yuwenscore != null" >
+        #{yuwenscore,jdbcType=DOUBLE},
+      </if>
+      <if test="shuxuescore != null" >
+        #{shuxuescore,jdbcType=DOUBLE},
+      </if>
+      <if test="yingyuscore != null" >
+        #{yingyuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="wuliscore != null" >
+        #{wuliscore,jdbcType=DOUBLE},
+      </if>
+      <if test="huaxuescore != null" >
+        #{huaxuescore,jdbcType=DOUBLE},
+      </if>
+      <if test="shengwuscore != null" >
+        #{shengwuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="zhengzhiscore != null" >
+        #{zhengzhiscore,jdbcType=DOUBLE},
+      </if>
+      <if test="diliscore != null" >
+        #{diliscore,jdbcType=DOUBLE},
+      </if>
+      <if test="lishiscore != null" >
+        #{lishiscore,jdbcType=DOUBLE},
+      </if>
+      <if test="jishuscore != null" >
+        #{jishuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifier != null" >
+        #{lastmodifier,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmoddate != null" >
+        #{lastmoddate,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.baidu.domain.ScoreDetailExample" resultType="java.lang.Integer" >
+    select count(*) from score_score_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update score_score_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.scoreid != null" >
+        scoreId = #{record.scoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailid != null" >
+        detailId = #{record.detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schoolid != null" >
+        schoolId = #{record.schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentid != null" >
+        studentId = #{record.studentid,jdbcType=BIGINT},
+      </if>
+      <if test="record.yuwenscore != null" >
+        yuWenScore = #{record.yuwenscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shuxuescore != null" >
+        shuXueScore = #{record.shuxuescore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.yingyuscore != null" >
+        yingYuScore = #{record.yingyuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wuliscore != null" >
+        wuLiScore = #{record.wuliscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.huaxuescore != null" >
+        huaXueScore = #{record.huaxuescore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shengwuscore != null" >
+        shengWuScore = #{record.shengwuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zhengzhiscore != null" >
+        zhengZhiScore = #{record.zhengzhiscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.diliscore != null" >
+        diLiScore = #{record.diliscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lishiscore != null" >
+        liShiScore = #{record.lishiscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jishuscore != null" >
+        jiShuScore = #{record.jishuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.publisher != null" >
+        publisher = #{record.publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        createDate = #{record.createdate,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodifier != null" >
+        lastModifier = #{record.lastmodifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastmoddate != null" >
+        lastModDate = #{record.lastmoddate,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update score_score_detail
+    set id = #{record.id,jdbcType=BIGINT},
+      scoreId = #{record.scoreid,jdbcType=VARCHAR},
+      detailId = #{record.detailid,jdbcType=VARCHAR},
+      schoolId = #{record.schoolid,jdbcType=INTEGER},
+      studentId = #{record.studentid,jdbcType=BIGINT},
+      yuWenScore = #{record.yuwenscore,jdbcType=DOUBLE},
+      shuXueScore = #{record.shuxuescore,jdbcType=DOUBLE},
+      yingYuScore = #{record.yingyuscore,jdbcType=DOUBLE},
+      wuLiScore = #{record.wuliscore,jdbcType=DOUBLE},
+      huaXueScore = #{record.huaxuescore,jdbcType=DOUBLE},
+      shengWuScore = #{record.shengwuscore,jdbcType=DOUBLE},
+      zhengZhiScore = #{record.zhengzhiscore,jdbcType=DOUBLE},
+      diLiScore = #{record.diliscore,jdbcType=DOUBLE},
+      liShiScore = #{record.lishiscore,jdbcType=DOUBLE},
+      jiShuScore = #{record.jishuscore,jdbcType=DOUBLE},
+      remark = #{record.remark,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      publisher = #{record.publisher,jdbcType=VARCHAR},
+      createDate = #{record.createdate,jdbcType=BIGINT},
+      lastModifier = #{record.lastmodifier,jdbcType=VARCHAR},
+      lastModDate = #{record.lastmoddate,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baidu.domain.ScoreDetail" >
+    update score_score_detail
+    <set >
+      <if test="scoreid != null" >
+        scoreId = #{scoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="detailid != null" >
+        detailId = #{detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolid != null" >
+        schoolId = #{schoolid,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null" >
+        studentId = #{studentid,jdbcType=BIGINT},
+      </if>
+      <if test="yuwenscore != null" >
+        yuWenScore = #{yuwenscore,jdbcType=DOUBLE},
+      </if>
+      <if test="shuxuescore != null" >
+        shuXueScore = #{shuxuescore,jdbcType=DOUBLE},
+      </if>
+      <if test="yingyuscore != null" >
+        yingYuScore = #{yingyuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="wuliscore != null" >
+        wuLiScore = #{wuliscore,jdbcType=DOUBLE},
+      </if>
+      <if test="huaxuescore != null" >
+        huaXueScore = #{huaxuescore,jdbcType=DOUBLE},
+      </if>
+      <if test="shengwuscore != null" >
+        shengWuScore = #{shengwuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="zhengzhiscore != null" >
+        zhengZhiScore = #{zhengzhiscore,jdbcType=DOUBLE},
+      </if>
+      <if test="diliscore != null" >
+        diLiScore = #{diliscore,jdbcType=DOUBLE},
+      </if>
+      <if test="lishiscore != null" >
+        liShiScore = #{lishiscore,jdbcType=DOUBLE},
+      </if>
+      <if test="jishuscore != null" >
+        jiShuScore = #{jishuscore,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="publisher != null" >
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifier != null" >
+        lastModifier = #{lastmodifier,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmoddate != null" >
+        lastModDate = #{lastmoddate,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.baidu.domain.ScoreDetail" >
+    update score_score_detail
+    set scoreId = #{scoreid,jdbcType=VARCHAR},
+      detailId = #{detailid,jdbcType=VARCHAR},
+      schoolId = #{schoolid,jdbcType=INTEGER},
+      studentId = #{studentid,jdbcType=BIGINT},
+      yuWenScore = #{yuwenscore,jdbcType=DOUBLE},
+      shuXueScore = #{shuxuescore,jdbcType=DOUBLE},
+      yingYuScore = #{yingyuscore,jdbcType=DOUBLE},
+      wuLiScore = #{wuliscore,jdbcType=DOUBLE},
+      huaXueScore = #{huaxuescore,jdbcType=DOUBLE},
+      shengWuScore = #{shengwuscore,jdbcType=DOUBLE},
+      zhengZhiScore = #{zhengzhiscore,jdbcType=DOUBLE},
+      diLiScore = #{diliscore,jdbcType=DOUBLE},
+      liShiScore = #{lishiscore,jdbcType=DOUBLE},
+      jiShuScore = #{jishuscore,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=BIGINT},
+      lastModifier = #{lastmodifier,jdbcType=VARCHAR},
+      lastModDate = #{lastmoddate,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

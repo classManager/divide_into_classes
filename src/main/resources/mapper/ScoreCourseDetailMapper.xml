@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.dao.ScoreCourseDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.baidu.domain.ScoreCourseDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="scoreId" property="scoreid" jdbcType="VARCHAR" />
+    <result column="detailId" property="detailid" jdbcType="VARCHAR" />
+    <result column="wuLiExScore" property="wuliexscore" jdbcType="DOUBLE" />
+    <result column="wuLiRank" property="wulirank" jdbcType="INTEGER" />
+    <result column="wuLiIsWeek" property="wuliisweek" jdbcType="INTEGER" />
+    <result column="huaXueExScore" property="huaxueexscore" jdbcType="DOUBLE" />
+    <result column="huaXueRank" property="huaxuerank" jdbcType="INTEGER" />
+    <result column="huaXueIsWeek" property="huaxueisweek" jdbcType="INTEGER" />
+    <result column="shengWuExScore" property="shengwuexscore" jdbcType="DOUBLE" />
+    <result column="shengWuRank" property="shengwurank" jdbcType="INTEGER" />
+    <result column="shengWuIsWeek" property="shengwuisweek" jdbcType="INTEGER" />
+    <result column="zhengZhiExScore" property="zhengzhiexscore" jdbcType="DOUBLE" />
+    <result column="zhengZhiRank" property="zhengzhirank" jdbcType="INTEGER" />
+    <result column="zhengZhiIsWeek" property="zhengzhiisweek" jdbcType="INTEGER" />
+    <result column="diLiExScore" property="diliexscore" jdbcType="DOUBLE" />
+    <result column="diLiRank" property="dilirank" jdbcType="INTEGER" />
+    <result column="diLiIsWeek" property="diliisweek" jdbcType="INTEGER" />
+    <result column="liShiExScore" property="lishiexscore" jdbcType="DOUBLE" />
+    <result column="liShiRank" property="lishirank" jdbcType="INTEGER" />
+    <result column="liShiIsWeek" property="lishiisweek" jdbcType="INTEGER" />
+    <result column="jiShuExScore" property="jishuexscore" jdbcType="DOUBLE" />
+    <result column="jiShuRank" property="jishurank" jdbcType="INTEGER" />
+    <result column="jiShuIsWeek" property="jishuisweek" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="BIGINT" />
+    <result column="lastModifier" property="lastmodifier" jdbcType="VARCHAR" />
+    <result column="lastModDate" property="lastmoddate" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, scoreId, detailId, wuLiExScore, wuLiRank, wuLiIsWeek, huaXueExScore, huaXueRank, 
+    huaXueIsWeek, shengWuExScore, shengWuRank, shengWuIsWeek, zhengZhiExScore, zhengZhiRank, 
+    zhengZhiIsWeek, diLiExScore, diLiRank, diLiIsWeek, liShiExScore, liShiRank, liShiIsWeek, 
+    jiShuExScore, jiShuRank, jiShuIsWeek, status, publisher, createDate, lastModifier, 
+    lastModDate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.baidu.domain.ScoreCourseDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from score_score_course_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from score_score_course_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from score_score_course_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.baidu.domain.ScoreCourseDetail" >
+    insert into score_score_course_detail (id, scoreId, detailId, 
+      wuLiExScore, wuLiRank, wuLiIsWeek, 
+      huaXueExScore, huaXueRank, huaXueIsWeek, 
+      shengWuExScore, shengWuRank, shengWuIsWeek, 
+      zhengZhiExScore, zhengZhiRank, zhengZhiIsWeek, 
+      diLiExScore, diLiRank, diLiIsWeek, 
+      liShiExScore, liShiRank, liShiIsWeek, 
+      jiShuExScore, jiShuRank, jiShuIsWeek, 
+      status, publisher, createDate, 
+      lastModifier, lastModDate)
+    values (#{id,jdbcType=BIGINT}, #{scoreid,jdbcType=VARCHAR}, #{detailid,jdbcType=VARCHAR}, 
+      #{wuliexscore,jdbcType=DOUBLE}, #{wulirank,jdbcType=INTEGER}, #{wuliisweek,jdbcType=INTEGER}, 
+      #{huaxueexscore,jdbcType=DOUBLE}, #{huaxuerank,jdbcType=INTEGER}, #{huaxueisweek,jdbcType=INTEGER}, 
+      #{shengwuexscore,jdbcType=DOUBLE}, #{shengwurank,jdbcType=INTEGER}, #{shengwuisweek,jdbcType=INTEGER}, 
+      #{zhengzhiexscore,jdbcType=DOUBLE}, #{zhengzhirank,jdbcType=INTEGER}, #{zhengzhiisweek,jdbcType=INTEGER}, 
+      #{diliexscore,jdbcType=DOUBLE}, #{dilirank,jdbcType=INTEGER}, #{diliisweek,jdbcType=INTEGER}, 
+      #{lishiexscore,jdbcType=DOUBLE}, #{lishirank,jdbcType=INTEGER}, #{lishiisweek,jdbcType=INTEGER}, 
+      #{jishuexscore,jdbcType=DOUBLE}, #{jishurank,jdbcType=INTEGER}, #{jishuisweek,jdbcType=INTEGER}, 
+      #{status,jdbcType=TINYINT}, #{publisher,jdbcType=VARCHAR}, #{createdate,jdbcType=BIGINT}, 
+      #{lastmodifier,jdbcType=VARCHAR}, #{lastmoddate,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.baidu.domain.ScoreCourseDetail" >
+    insert into score_score_course_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scoreid != null" >
+        scoreId,
+      </if>
+      <if test="detailid != null" >
+        detailId,
+      </if>
+      <if test="wuliexscore != null" >
+        wuLiExScore,
+      </if>
+      <if test="wulirank != null" >
+        wuLiRank,
+      </if>
+      <if test="wuliisweek != null" >
+        wuLiIsWeek,
+      </if>
+      <if test="huaxueexscore != null" >
+        huaXueExScore,
+      </if>
+      <if test="huaxuerank != null" >
+        huaXueRank,
+      </if>
+      <if test="huaxueisweek != null" >
+        huaXueIsWeek,
+      </if>
+      <if test="shengwuexscore != null" >
+        shengWuExScore,
+      </if>
+      <if test="shengwurank != null" >
+        shengWuRank,
+      </if>
+      <if test="shengwuisweek != null" >
+        shengWuIsWeek,
+      </if>
+      <if test="zhengzhiexscore != null" >
+        zhengZhiExScore,
+      </if>
+      <if test="zhengzhirank != null" >
+        zhengZhiRank,
+      </if>
+      <if test="zhengzhiisweek != null" >
+        zhengZhiIsWeek,
+      </if>
+      <if test="diliexscore != null" >
+        diLiExScore,
+      </if>
+      <if test="dilirank != null" >
+        diLiRank,
+      </if>
+      <if test="diliisweek != null" >
+        diLiIsWeek,
+      </if>
+      <if test="lishiexscore != null" >
+        liShiExScore,
+      </if>
+      <if test="lishirank != null" >
+        liShiRank,
+      </if>
+      <if test="lishiisweek != null" >
+        liShiIsWeek,
+      </if>
+      <if test="jishuexscore != null" >
+        jiShuExScore,
+      </if>
+      <if test="jishurank != null" >
+        jiShuRank,
+      </if>
+      <if test="jishuisweek != null" >
+        jiShuIsWeek,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="lastmodifier != null" >
+        lastModifier,
+      </if>
+      <if test="lastmoddate != null" >
+        lastModDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="scoreid != null" >
+        #{scoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="detailid != null" >
+        #{detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="wuliexscore != null" >
+        #{wuliexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="wulirank != null" >
+        #{wulirank,jdbcType=INTEGER},
+      </if>
+      <if test="wuliisweek != null" >
+        #{wuliisweek,jdbcType=INTEGER},
+      </if>
+      <if test="huaxueexscore != null" >
+        #{huaxueexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="huaxuerank != null" >
+        #{huaxuerank,jdbcType=INTEGER},
+      </if>
+      <if test="huaxueisweek != null" >
+        #{huaxueisweek,jdbcType=INTEGER},
+      </if>
+      <if test="shengwuexscore != null" >
+        #{shengwuexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="shengwurank != null" >
+        #{shengwurank,jdbcType=INTEGER},
+      </if>
+      <if test="shengwuisweek != null" >
+        #{shengwuisweek,jdbcType=INTEGER},
+      </if>
+      <if test="zhengzhiexscore != null" >
+        #{zhengzhiexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="zhengzhirank != null" >
+        #{zhengzhirank,jdbcType=INTEGER},
+      </if>
+      <if test="zhengzhiisweek != null" >
+        #{zhengzhiisweek,jdbcType=INTEGER},
+      </if>
+      <if test="diliexscore != null" >
+        #{diliexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="dilirank != null" >
+        #{dilirank,jdbcType=INTEGER},
+      </if>
+      <if test="diliisweek != null" >
+        #{diliisweek,jdbcType=INTEGER},
+      </if>
+      <if test="lishiexscore != null" >
+        #{lishiexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="lishirank != null" >
+        #{lishirank,jdbcType=INTEGER},
+      </if>
+      <if test="lishiisweek != null" >
+        #{lishiisweek,jdbcType=INTEGER},
+      </if>
+      <if test="jishuexscore != null" >
+        #{jishuexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="jishurank != null" >
+        #{jishurank,jdbcType=INTEGER},
+      </if>
+      <if test="jishuisweek != null" >
+        #{jishuisweek,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifier != null" >
+        #{lastmodifier,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmoddate != null" >
+        #{lastmoddate,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.baidu.domain.ScoreCourseDetailExample" resultType="java.lang.Integer" >
+    select count(*) from score_score_course_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update score_score_course_detail
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.scoreid != null" >
+        scoreId = #{record.scoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailid != null" >
+        detailId = #{record.detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wuliexscore != null" >
+        wuLiExScore = #{record.wuliexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.wulirank != null" >
+        wuLiRank = #{record.wulirank,jdbcType=INTEGER},
+      </if>
+      <if test="record.wuliisweek != null" >
+        wuLiIsWeek = #{record.wuliisweek,jdbcType=INTEGER},
+      </if>
+      <if test="record.huaxueexscore != null" >
+        huaXueExScore = #{record.huaxueexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.huaxuerank != null" >
+        huaXueRank = #{record.huaxuerank,jdbcType=INTEGER},
+      </if>
+      <if test="record.huaxueisweek != null" >
+        huaXueIsWeek = #{record.huaxueisweek,jdbcType=INTEGER},
+      </if>
+      <if test="record.shengwuexscore != null" >
+        shengWuExScore = #{record.shengwuexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shengwurank != null" >
+        shengWuRank = #{record.shengwurank,jdbcType=INTEGER},
+      </if>
+      <if test="record.shengwuisweek != null" >
+        shengWuIsWeek = #{record.shengwuisweek,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhengzhiexscore != null" >
+        zhengZhiExScore = #{record.zhengzhiexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zhengzhirank != null" >
+        zhengZhiRank = #{record.zhengzhirank,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhengzhiisweek != null" >
+        zhengZhiIsWeek = #{record.zhengzhiisweek,jdbcType=INTEGER},
+      </if>
+      <if test="record.diliexscore != null" >
+        diLiExScore = #{record.diliexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.dilirank != null" >
+        diLiRank = #{record.dilirank,jdbcType=INTEGER},
+      </if>
+      <if test="record.diliisweek != null" >
+        diLiIsWeek = #{record.diliisweek,jdbcType=INTEGER},
+      </if>
+      <if test="record.lishiexscore != null" >
+        liShiExScore = #{record.lishiexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.lishirank != null" >
+        liShiRank = #{record.lishirank,jdbcType=INTEGER},
+      </if>
+      <if test="record.lishiisweek != null" >
+        liShiIsWeek = #{record.lishiisweek,jdbcType=INTEGER},
+      </if>
+      <if test="record.jishuexscore != null" >
+        jiShuExScore = #{record.jishuexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jishurank != null" >
+        jiShuRank = #{record.jishurank,jdbcType=INTEGER},
+      </if>
+      <if test="record.jishuisweek != null" >
+        jiShuIsWeek = #{record.jishuisweek,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.publisher != null" >
+        publisher = #{record.publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        createDate = #{record.createdate,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodifier != null" >
+        lastModifier = #{record.lastmodifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastmoddate != null" >
+        lastModDate = #{record.lastmoddate,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update score_score_course_detail
+    set id = #{record.id,jdbcType=BIGINT},
+      scoreId = #{record.scoreid,jdbcType=VARCHAR},
+      detailId = #{record.detailid,jdbcType=VARCHAR},
+      wuLiExScore = #{record.wuliexscore,jdbcType=DOUBLE},
+      wuLiRank = #{record.wulirank,jdbcType=INTEGER},
+      wuLiIsWeek = #{record.wuliisweek,jdbcType=INTEGER},
+      huaXueExScore = #{record.huaxueexscore,jdbcType=DOUBLE},
+      huaXueRank = #{record.huaxuerank,jdbcType=INTEGER},
+      huaXueIsWeek = #{record.huaxueisweek,jdbcType=INTEGER},
+      shengWuExScore = #{record.shengwuexscore,jdbcType=DOUBLE},
+      shengWuRank = #{record.shengwurank,jdbcType=INTEGER},
+      shengWuIsWeek = #{record.shengwuisweek,jdbcType=INTEGER},
+      zhengZhiExScore = #{record.zhengzhiexscore,jdbcType=DOUBLE},
+      zhengZhiRank = #{record.zhengzhirank,jdbcType=INTEGER},
+      zhengZhiIsWeek = #{record.zhengzhiisweek,jdbcType=INTEGER},
+      diLiExScore = #{record.diliexscore,jdbcType=DOUBLE},
+      diLiRank = #{record.dilirank,jdbcType=INTEGER},
+      diLiIsWeek = #{record.diliisweek,jdbcType=INTEGER},
+      liShiExScore = #{record.lishiexscore,jdbcType=DOUBLE},
+      liShiRank = #{record.lishirank,jdbcType=INTEGER},
+      liShiIsWeek = #{record.lishiisweek,jdbcType=INTEGER},
+      jiShuExScore = #{record.jishuexscore,jdbcType=DOUBLE},
+      jiShuRank = #{record.jishurank,jdbcType=INTEGER},
+      jiShuIsWeek = #{record.jishuisweek,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=TINYINT},
+      publisher = #{record.publisher,jdbcType=VARCHAR},
+      createDate = #{record.createdate,jdbcType=BIGINT},
+      lastModifier = #{record.lastmodifier,jdbcType=VARCHAR},
+      lastModDate = #{record.lastmoddate,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baidu.domain.ScoreCourseDetail" >
+    update score_score_course_detail
+    <set >
+      <if test="scoreid != null" >
+        scoreId = #{scoreid,jdbcType=VARCHAR},
+      </if>
+      <if test="detailid != null" >
+        detailId = #{detailid,jdbcType=VARCHAR},
+      </if>
+      <if test="wuliexscore != null" >
+        wuLiExScore = #{wuliexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="wulirank != null" >
+        wuLiRank = #{wulirank,jdbcType=INTEGER},
+      </if>
+      <if test="wuliisweek != null" >
+        wuLiIsWeek = #{wuliisweek,jdbcType=INTEGER},
+      </if>
+      <if test="huaxueexscore != null" >
+        huaXueExScore = #{huaxueexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="huaxuerank != null" >
+        huaXueRank = #{huaxuerank,jdbcType=INTEGER},
+      </if>
+      <if test="huaxueisweek != null" >
+        huaXueIsWeek = #{huaxueisweek,jdbcType=INTEGER},
+      </if>
+      <if test="shengwuexscore != null" >
+        shengWuExScore = #{shengwuexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="shengwurank != null" >
+        shengWuRank = #{shengwurank,jdbcType=INTEGER},
+      </if>
+      <if test="shengwuisweek != null" >
+        shengWuIsWeek = #{shengwuisweek,jdbcType=INTEGER},
+      </if>
+      <if test="zhengzhiexscore != null" >
+        zhengZhiExScore = #{zhengzhiexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="zhengzhirank != null" >
+        zhengZhiRank = #{zhengzhirank,jdbcType=INTEGER},
+      </if>
+      <if test="zhengzhiisweek != null" >
+        zhengZhiIsWeek = #{zhengzhiisweek,jdbcType=INTEGER},
+      </if>
+      <if test="diliexscore != null" >
+        diLiExScore = #{diliexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="dilirank != null" >
+        diLiRank = #{dilirank,jdbcType=INTEGER},
+      </if>
+      <if test="diliisweek != null" >
+        diLiIsWeek = #{diliisweek,jdbcType=INTEGER},
+      </if>
+      <if test="lishiexscore != null" >
+        liShiExScore = #{lishiexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="lishirank != null" >
+        liShiRank = #{lishirank,jdbcType=INTEGER},
+      </if>
+      <if test="lishiisweek != null" >
+        liShiIsWeek = #{lishiisweek,jdbcType=INTEGER},
+      </if>
+      <if test="jishuexscore != null" >
+        jiShuExScore = #{jishuexscore,jdbcType=DOUBLE},
+      </if>
+      <if test="jishurank != null" >
+        jiShuRank = #{jishurank,jdbcType=INTEGER},
+      </if>
+      <if test="jishuisweek != null" >
+        jiShuIsWeek = #{jishuisweek,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="publisher != null" >
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifier != null" >
+        lastModifier = #{lastmodifier,jdbcType=VARCHAR},
+      </if>
+      <if test="lastmoddate != null" >
+        lastModDate = #{lastmoddate,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.baidu.domain.ScoreCourseDetail" >
+    update score_score_course_detail
+    set scoreId = #{scoreid,jdbcType=VARCHAR},
+      detailId = #{detailid,jdbcType=VARCHAR},
+      wuLiExScore = #{wuliexscore,jdbcType=DOUBLE},
+      wuLiRank = #{wulirank,jdbcType=INTEGER},
+      wuLiIsWeek = #{wuliisweek,jdbcType=INTEGER},
+      huaXueExScore = #{huaxueexscore,jdbcType=DOUBLE},
+      huaXueRank = #{huaxuerank,jdbcType=INTEGER},
+      huaXueIsWeek = #{huaxueisweek,jdbcType=INTEGER},
+      shengWuExScore = #{shengwuexscore,jdbcType=DOUBLE},
+      shengWuRank = #{shengwurank,jdbcType=INTEGER},
+      shengWuIsWeek = #{shengwuisweek,jdbcType=INTEGER},
+      zhengZhiExScore = #{zhengzhiexscore,jdbcType=DOUBLE},
+      zhengZhiRank = #{zhengzhirank,jdbcType=INTEGER},
+      zhengZhiIsWeek = #{zhengzhiisweek,jdbcType=INTEGER},
+      diLiExScore = #{diliexscore,jdbcType=DOUBLE},
+      diLiRank = #{dilirank,jdbcType=INTEGER},
+      diLiIsWeek = #{diliisweek,jdbcType=INTEGER},
+      liShiExScore = #{lishiexscore,jdbcType=DOUBLE},
+      liShiRank = #{lishirank,jdbcType=INTEGER},
+      liShiIsWeek = #{lishiisweek,jdbcType=INTEGER},
+      jiShuExScore = #{jishuexscore,jdbcType=DOUBLE},
+      jiShuRank = #{jishurank,jdbcType=INTEGER},
+      jiShuIsWeek = #{jishuisweek,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=BIGINT},
+      lastModifier = #{lastmodifier,jdbcType=VARCHAR},
+      lastModDate = #{lastmoddate,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
