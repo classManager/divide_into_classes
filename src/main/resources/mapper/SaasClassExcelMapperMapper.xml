@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.dao.SaasClassExcelMapperMapper" >
+  <resultMap id="BaseResultMap" type="com.baidu.domain.SaasClassExcelMapper" >
+    <result column="id" property="id" jdbcType="DOUBLE" />
+    <result column="class_grade_id" property="classGradeId" jdbcType="DOUBLE" />
+    <result column="class_grade" property="classGrade" jdbcType="VARCHAR" />
+    <result column="class_group" property="classGroup" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="teacher_code" property="teacherCode" jdbcType="VARCHAR" />
+    <result column="class_type" property="classType" jdbcType="VARCHAR" />
+    <result column="class_code" property="classCode" jdbcType="VARCHAR" />
+    <result column="class_remark" property="classRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, class_grade_id, class_grade, class_group, class_name, teacher_code, class_type, 
+    class_code, class_remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.baidu.domain.SaasClassExcelMapperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from saas_383_class_excel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insert" parameterType="com.baidu.domain.SaasClassExcelMapper" >
+    insert into saas_383_class_excel (id, class_grade_id, class_grade, 
+      class_group, class_name, teacher_code, 
+      class_type, class_code, class_remark
+      )
+    values (#{id,jdbcType=DOUBLE}, #{classGradeId,jdbcType=DOUBLE}, #{classGrade,jdbcType=VARCHAR}, 
+      #{classGroup,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{teacherCode,jdbcType=VARCHAR}, 
+      #{classType,jdbcType=VARCHAR}, #{classCode,jdbcType=VARCHAR}, #{classRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.baidu.domain.SaasClassExcelMapper" >
+    insert into saas_383_class_excel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="classGradeId != null" >
+        class_grade_id,
+      </if>
+      <if test="classGrade != null" >
+        class_grade,
+      </if>
+      <if test="classGroup != null" >
+        class_group,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="teacherCode != null" >
+        teacher_code,
+      </if>
+      <if test="classType != null" >
+        class_type,
+      </if>
+      <if test="classCode != null" >
+        class_code,
+      </if>
+      <if test="classRemark != null" >
+        class_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DOUBLE},
+      </if>
+      <if test="classGradeId != null" >
+        #{classGradeId,jdbcType=DOUBLE},
+      </if>
+      <if test="classGrade != null" >
+        #{classGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="classGroup != null" >
+        #{classGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherCode != null" >
+        #{teacherCode,jdbcType=VARCHAR},
+      </if>
+      <if test="classType != null" >
+        #{classType,jdbcType=VARCHAR},
+      </if>
+      <if test="classCode != null" >
+        #{classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="classRemark != null" >
+        #{classRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.baidu.domain.SaasClassExcelMapperExample" resultType="java.lang.Integer" >
+    select count(*) from saas_383_class_excel
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update saas_383_class_excel
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=DOUBLE},
+      </if>
+      <if test="record.classGradeId != null" >
+        class_grade_id = #{record.classGradeId,jdbcType=DOUBLE},
+      </if>
+      <if test="record.classGrade != null" >
+        class_grade = #{record.classGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classGroup != null" >
+        class_group = #{record.classGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.className != null" >
+        class_name = #{record.className,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherCode != null" >
+        teacher_code = #{record.teacherCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classType != null" >
+        class_type = #{record.classType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classCode != null" >
+        class_code = #{record.classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classRemark != null" >
+        class_remark = #{record.classRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update saas_383_class_excel
+    set id = #{record.id,jdbcType=DOUBLE},
+      class_grade_id = #{record.classGradeId,jdbcType=DOUBLE},
+      class_grade = #{record.classGrade,jdbcType=VARCHAR},
+      class_group = #{record.classGroup,jdbcType=VARCHAR},
+      class_name = #{record.className,jdbcType=VARCHAR},
+      teacher_code = #{record.teacherCode,jdbcType=VARCHAR},
+      class_type = #{record.classType,jdbcType=VARCHAR},
+      class_code = #{record.classCode,jdbcType=VARCHAR},
+      class_remark = #{record.classRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

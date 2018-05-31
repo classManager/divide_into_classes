@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baidu.dao.SaasStudentExcelMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.domain.SaasStudentExcel">
+        <result column="id" property="id" jdbcType="DOUBLE"/>
+        <result column="student_grade_year_id" property="studentGradeYearId" jdbcType="DOUBLE"/>
+        <result column="student_grade" property="studentGrade" jdbcType="VARCHAR"/>
+        <result column="student_class" property="studentClass" jdbcType="VARCHAR"/>
+        <result column="student_no" property="studentNo" jdbcType="DOUBLE"/>
+        <result column="student_name" property="studentName" jdbcType="VARCHAR"/>
+        <result column="student_check_major1" property="studentCheckMajor1" jdbcType="VARCHAR"/>
+        <result column="student_check_major_class1" property="studentCheckMajorClass1" jdbcType="VARCHAR"/>
+        <result column="student_check_major2" property="studentCheckMajor2" jdbcType="VARCHAR"/>
+        <result column="student_check_major_class2" property="studentCheckMajorClass2" jdbcType="VARCHAR"/>
+        <result column="student_check_major3" property="studentCheckMajor3" jdbcType="VARCHAR"/>
+        <result column="student_check_major_class3" property="studentCheckMajorClass3" jdbcType="VARCHAR"/>
+        <result column="student_sex" property="studentSex" jdbcType="VARCHAR"/>
+        <result column="student_level" property="studentLevel" jdbcType="VARCHAR"/>
+        <result column="student_check_major4" property="studentCheckMajor4" jdbcType="VARCHAR"/>
+        <result column="student_check_major_class4" property="studentCheckMajorClass4" jdbcType="VARCHAR"/>
+        <result column="student_check_major5" property="studentCheckMajor5" jdbcType="VARCHAR"/>
+        <result column="student_check_major_class5" property="studentCheckMajorClass5" jdbcType="VARCHAR"/>
+        <result column="student_check_major6" property="studentCheckMajor6" jdbcType="VARCHAR"/>
+        <result column="student_check_major_class6" property="studentCheckMajorClass6" jdbcType="VARCHAR"/>
+        <result column="student_check_major7" property="studentCheckMajor7" jdbcType="VARCHAR"/>
+        <result column="student_check_major_class7" property="studentCheckMajorClass7" jdbcType="VARCHAR"/>
+        <result column="student_graduate_school" property="studentGraduateSchool" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, student_grade_year_id, student_grade, student_class, student_no, student_name, 
+    student_check_major1, student_check_major_class1, student_check_major2, student_check_major_class2, 
+    student_check_major3, student_check_major_class3, student_sex, student_level, student_check_major4, 
+    student_check_major_class4, student_check_major5, student_check_major_class5, student_check_major6, 
+    student_check_major_class6, student_check_major7, student_check_major_class7, student_graduate_school
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.baidu.domain.SaasStudentExcelExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from saas_383_student_excel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <insert id="insert" parameterType="com.baidu.domain.SaasStudentExcel">
+    insert into saas_383_student_excel (id, student_grade_year_id, student_grade, 
+      student_class, student_no, student_name, 
+      student_check_major1, student_check_major_class1, 
+      student_check_major2, student_check_major_class2, 
+      student_check_major3, student_check_major_class3, 
+      student_sex, student_level, student_check_major4, 
+      student_check_major_class4, student_check_major5, 
+      student_check_major_class5, student_check_major6, 
+      student_check_major_class6, student_check_major7, 
+      student_check_major_class7, student_graduate_school
+      )
+    values (#{id,jdbcType=DOUBLE}, #{studentGradeYearId,jdbcType=DOUBLE}, #{studentGrade,jdbcType=VARCHAR}, 
+      #{studentClass,jdbcType=VARCHAR}, #{studentNo,jdbcType=DOUBLE}, #{studentName,jdbcType=VARCHAR}, 
+      #{studentCheckMajor1,jdbcType=VARCHAR}, #{studentCheckMajorClass1,jdbcType=VARCHAR}, 
+      #{studentCheckMajor2,jdbcType=VARCHAR}, #{studentCheckMajorClass2,jdbcType=VARCHAR}, 
+      #{studentCheckMajor3,jdbcType=VARCHAR}, #{studentCheckMajorClass3,jdbcType=VARCHAR}, 
+      #{studentSex,jdbcType=VARCHAR}, #{studentLevel,jdbcType=VARCHAR}, #{studentCheckMajor4,jdbcType=VARCHAR}, 
+      #{studentCheckMajorClass4,jdbcType=VARCHAR}, #{studentCheckMajor5,jdbcType=VARCHAR}, 
+      #{studentCheckMajorClass5,jdbcType=VARCHAR}, #{studentCheckMajor6,jdbcType=VARCHAR}, 
+      #{studentCheckMajorClass6,jdbcType=VARCHAR}, #{studentCheckMajor7,jdbcType=VARCHAR}, 
+      #{studentCheckMajorClass7,jdbcType=VARCHAR}, #{studentGraduateSchool,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.baidu.domain.SaasStudentExcel">
+        insert into saas_383_student_excel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="studentGradeYearId != null">
+                student_grade_year_id,
+            </if>
+            <if test="studentGrade != null">
+                student_grade,
+            </if>
+            <if test="studentClass != null">
+                student_class,
+            </if>
+            <if test="studentNo != null">
+                student_no,
+            </if>
+            <if test="studentName != null">
+                student_name,
+            </if>
+            <if test="studentCheckMajor1 != null">
+                student_check_major1,
+            </if>
+            <if test="studentCheckMajorClass1 != null">
+                student_check_major_class1,
+            </if>
+            <if test="studentCheckMajor2 != null">
+                student_check_major2,
+            </if>
+            <if test="studentCheckMajorClass2 != null">
+                student_check_major_class2,
+            </if>
+            <if test="studentCheckMajor3 != null">
+                student_check_major3,
+            </if>
+            <if test="studentCheckMajorClass3 != null">
+                student_check_major_class3,
+            </if>
+            <if test="studentSex != null">
+                student_sex,
+            </if>
+            <if test="studentLevel != null">
+                student_level,
+            </if>
+            <if test="studentCheckMajor4 != null">
+                student_check_major4,
+            </if>
+            <if test="studentCheckMajorClass4 != null">
+                student_check_major_class4,
+            </if>
+            <if test="studentCheckMajor5 != null">
+                student_check_major5,
+            </if>
+            <if test="studentCheckMajorClass5 != null">
+                student_check_major_class5,
+            </if>
+            <if test="studentCheckMajor6 != null">
+                student_check_major6,
+            </if>
+            <if test="studentCheckMajorClass6 != null">
+                student_check_major_class6,
+            </if>
+            <if test="studentCheckMajor7 != null">
+                student_check_major7,
+            </if>
+            <if test="studentCheckMajorClass7 != null">
+                student_check_major_class7,
+            </if>
+            <if test="studentGraduateSchool != null">
+                student_graduate_school,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=DOUBLE},
+            </if>
+            <if test="studentGradeYearId != null">
+                #{studentGradeYearId,jdbcType=DOUBLE},
+            </if>
+            <if test="studentGrade != null">
+                #{studentGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="studentClass != null">
+                #{studentClass,jdbcType=VARCHAR},
+            </if>
+            <if test="studentNo != null">
+                #{studentNo,jdbcType=DOUBLE},
+            </if>
+            <if test="studentName != null">
+                #{studentName,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajor1 != null">
+                #{studentCheckMajor1,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajorClass1 != null">
+                #{studentCheckMajorClass1,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajor2 != null">
+                #{studentCheckMajor2,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajorClass2 != null">
+                #{studentCheckMajorClass2,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajor3 != null">
+                #{studentCheckMajor3,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajorClass3 != null">
+                #{studentCheckMajorClass3,jdbcType=VARCHAR},
+            </if>
+            <if test="studentSex != null">
+                #{studentSex,jdbcType=VARCHAR},
+            </if>
+            <if test="studentLevel != null">
+                #{studentLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajor4 != null">
+                #{studentCheckMajor4,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajorClass4 != null">
+                #{studentCheckMajorClass4,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajor5 != null">
+                #{studentCheckMajor5,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajorClass5 != null">
+                #{studentCheckMajorClass5,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajor6 != null">
+                #{studentCheckMajor6,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajorClass6 != null">
+                #{studentCheckMajorClass6,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajor7 != null">
+                #{studentCheckMajor7,jdbcType=VARCHAR},
+            </if>
+            <if test="studentCheckMajorClass7 != null">
+                #{studentCheckMajorClass7,jdbcType=VARCHAR},
+            </if>
+            <if test="studentGraduateSchool != null">
+                #{studentGraduateSchool,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.domain.SaasStudentExcelExample" resultType="java.lang.Integer">
+        select count(*) from saas_383_student_excel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update saas_383_student_excel
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=DOUBLE},
+            </if>
+            <if test="record.studentGradeYearId != null">
+                student_grade_year_id = #{record.studentGradeYearId,jdbcType=DOUBLE},
+            </if>
+            <if test="record.studentGrade != null">
+                student_grade = #{record.studentGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentClass != null">
+                student_class = #{record.studentClass,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentNo != null">
+                student_no = #{record.studentNo,jdbcType=DOUBLE},
+            </if>
+            <if test="record.studentName != null">
+                student_name = #{record.studentName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajor1 != null">
+                student_check_major1 = #{record.studentCheckMajor1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajorClass1 != null">
+                student_check_major_class1 = #{record.studentCheckMajorClass1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajor2 != null">
+                student_check_major2 = #{record.studentCheckMajor2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajorClass2 != null">
+                student_check_major_class2 = #{record.studentCheckMajorClass2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajor3 != null">
+                student_check_major3 = #{record.studentCheckMajor3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajorClass3 != null">
+                student_check_major_class3 = #{record.studentCheckMajorClass3,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentSex != null">
+                student_sex = #{record.studentSex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentLevel != null">
+                student_level = #{record.studentLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajor4 != null">
+                student_check_major4 = #{record.studentCheckMajor4,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajorClass4 != null">
+                student_check_major_class4 = #{record.studentCheckMajorClass4,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajor5 != null">
+                student_check_major5 = #{record.studentCheckMajor5,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajorClass5 != null">
+                student_check_major_class5 = #{record.studentCheckMajorClass5,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajor6 != null">
+                student_check_major6 = #{record.studentCheckMajor6,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajorClass6 != null">
+                student_check_major_class6 = #{record.studentCheckMajorClass6,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajor7 != null">
+                student_check_major7 = #{record.studentCheckMajor7,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentCheckMajorClass7 != null">
+                student_check_major_class7 = #{record.studentCheckMajorClass7,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentGraduateSchool != null">
+                student_graduate_school = #{record.studentGraduateSchool,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update saas_383_student_excel
+        set id = #{record.id,jdbcType=DOUBLE},
+        student_grade_year_id = #{record.studentGradeYearId,jdbcType=DOUBLE},
+        student_grade = #{record.studentGrade,jdbcType=VARCHAR},
+        student_class = #{record.studentClass,jdbcType=VARCHAR},
+        student_no = #{record.studentNo,jdbcType=DOUBLE},
+        student_name = #{record.studentName,jdbcType=VARCHAR},
+        student_check_major1 = #{record.studentCheckMajor1,jdbcType=VARCHAR},
+        student_check_major_class1 = #{record.studentCheckMajorClass1,jdbcType=VARCHAR},
+        student_check_major2 = #{record.studentCheckMajor2,jdbcType=VARCHAR},
+        student_check_major_class2 = #{record.studentCheckMajorClass2,jdbcType=VARCHAR},
+        student_check_major3 = #{record.studentCheckMajor3,jdbcType=VARCHAR},
+        student_check_major_class3 = #{record.studentCheckMajorClass3,jdbcType=VARCHAR},
+        student_sex = #{record.studentSex,jdbcType=VARCHAR},
+        student_level = #{record.studentLevel,jdbcType=VARCHAR},
+        student_check_major4 = #{record.studentCheckMajor4,jdbcType=VARCHAR},
+        student_check_major_class4 = #{record.studentCheckMajorClass4,jdbcType=VARCHAR},
+        student_check_major5 = #{record.studentCheckMajor5,jdbcType=VARCHAR},
+        student_check_major_class5 = #{record.studentCheckMajorClass5,jdbcType=VARCHAR},
+        student_check_major6 = #{record.studentCheckMajor6,jdbcType=VARCHAR},
+        student_check_major_class6 = #{record.studentCheckMajorClass6,jdbcType=VARCHAR},
+        student_check_major7 = #{record.studentCheckMajor7,jdbcType=VARCHAR},
+        student_check_major_class7 = #{record.studentCheckMajorClass7,jdbcType=VARCHAR},
+        student_graduate_school = #{record.studentGraduateSchool,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+    <!--定三-->
+    <select id="selectByThreeCheckMajor" resultType="java.util.Map" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where (
+        student_check_major1= ${checkMajor1}
+        OR student_check_major2 = ${checkMajor1}
+        OR student_check_major3 = ${checkMajor1}) and (
+        student_check_major1= ${checkMajor2}
+        OR student_check_major2 = ${checkMajor2}
+        OR student_check_major3 = ${checkMajor2})
+        and (
+        student_check_major1= ${checkMajor3}
+        OR student_check_major2 = ${checkMajor3}
+        OR student_check_major3 = ${checkMajor3})
+
+    </select>
+    <!--定儿-->
+    <select id="selectBySecondCheckMajor" resultType="java.util.Map" parameterType="java.util.Map" >
+        select
+        <include refid="Base_Column_List"/>
+        from ${tableName}
+        where (
+        student_check_major1= ${checkMajor1}
+        OR student_check_major2 = ${checkMajor1}
+        OR student_check_major3 =${checkMajor1}) and (
+        student_check_major1= ${checkMajor2}
+        OR student_check_major2 = ${checkMajor2}
+        OR student_check_major3 = ${checkMajor2})
+
+    </select>
+</mapper>
