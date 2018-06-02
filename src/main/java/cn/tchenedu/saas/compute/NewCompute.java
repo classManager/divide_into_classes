@@ -36,6 +36,7 @@ public class NewCompute {
         Map<String,String> composeDump = new HashMap<>();
 
 
+        //男生
         for (DivideStudentInfo item : maleStudents){
 
             List<DivideStudentInfo> divideStudentInfoList = mailComposeNumber.get(item.getComposeId());
@@ -50,6 +51,7 @@ public class NewCompute {
             composeDump.put(item.getComposeId(),item.getComposeId());
         }
 
+        //女生
         for (DivideStudentInfo item : fmaleStudents){
 
             List<DivideStudentInfo> divideStudentInfoList = fmailComposeNumber.get(item.getComposeId());
@@ -66,12 +68,13 @@ public class NewCompute {
         //把选择同一个组合的男女生总数统计下
         List<DeductionComposeInfoDto> composeChooses = new ArrayList<>();
         for (String key : composeDump.keySet()){
+
             DeductionComposeInfoDto dto = new DeductionComposeInfoDto();
             dto.setComposeId(key);
 
             Integer mNumber = mailComposeNumber.get(key) != null ? mailComposeNumber.get(key).size() : 0;
             Integer fmNumber = fmailComposeNumber.get(key) != null ? fmailComposeNumber.get(key).size() : 0;
-
+            //选择同一个组合的男生和女生人数
             dto.setChooseNumber(mNumber + fmNumber);
 
             composeChooses.add(dto);

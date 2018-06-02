@@ -1,7 +1,8 @@
 package cn.tchenedu.saas.compute.deduction.dto;
 
 /**
- * Created by ckzhang on 2017/10/21.
+ * 组合Id和对应的选择人数实体
+ * LT
  */
 public class DeductionComposeInfoDto {
 

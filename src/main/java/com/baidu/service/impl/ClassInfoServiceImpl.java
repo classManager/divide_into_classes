@@ -35,6 +35,7 @@ public class ClassInfoServiceImpl implements ClassInfoService, ApplicationContex
         map.put("tableName", tableName);
         return classInfoMapper.getClassList(map);
     }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 

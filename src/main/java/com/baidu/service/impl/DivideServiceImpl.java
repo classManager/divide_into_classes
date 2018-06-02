@@ -1,7 +1,17 @@
 package com.baidu.service.impl;
 
+import cn.tchenedu.saas.compute.NewDivideClass;
+import cn.tchenedu.saas.dto.DivideData;
+import cn.tchenedu.saas.dto.DivideStudentDataDetail;
+import cn.tchenedu.saas.dto.DivideStudentInfo;
+import cn.tchenedu.saas.dto.DivideTaskInfo;
+import cn.tchenedu.saas.dto.NewDivideDetailRsDto;
 import com.baidu.domain.ClassInfo;
-import com.baidu.service.*;
+import com.baidu.service.ClassInfoService;
+import com.baidu.service.CourseMapService;
+import com.baidu.service.DivideService;
+import com.baidu.service.ScoreTaskService;
+import com.baidu.service.StudentBaseService;
 import com.baidu.util.Result;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +19,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +110,60 @@ public class DivideServiceImpl implements DivideService, ApplicationContextAware
         }
         return result;
 
+    }
+
+    @Override
+    public Result divideClass(int schoolId, String gradeName) {
+        Result result = new Result();
+        result.setReturncode(-1);
+
+        List<DivideStudentInfo> studentInfos = new ArrayList<>();
+        List<Map<String, Object>> subject = studentBaseService.selectAllStudentAndScore(schoolId, gradeName);
+        for (Map<String, Object> mp : subject) {
+            DivideStudentInfo divideStudentInfo = new DivideStudentInfo();
+            divideStudentInfo.setComposeId(String.valueOf(mp.get("composeId")));
+            divideStudentInfo.setDlScore(Double.valueOf(mp.get("dlScore").toString()));
+            divideStudentInfo.setLevel(1);//Integer.valueOf(mp.get("level") == null ? "0" : mp.get("level").toString())
+            divideStudentInfo.setWlScore(Double.valueOf(mp.get("wlScore") == null ? "0" : mp.get("wlScore").toString()));
+            divideStudentInfo.setHxScore(Double.valueOf(mp.get("hxScore") == null ? "0" : mp.get("hxScore").toString()));
+            divideStudentInfo.setSwScore(Double.valueOf(mp.get("swScore") == null ? "0" : mp.get("swScore").toString()));
+            divideStudentInfo.setZzScore(Double.valueOf(mp.get("zzScore") == null ? "0" : mp.get("zzScore").toString()));
+            divideStudentInfo.setLsScore(Double.valueOf(mp.get("lsScore") == null ? "0" : mp.get("lsScore").toString()));
+            divideStudentInfo.setJsScore(Double.valueOf(mp.get("jsScore") == null ? "0" : mp.get("jsScore").toString()));
+            divideStudentInfo.setSex(Integer.valueOf(mp.get("sex") == null ? "0" : mp.get("sex").toString()));
+            studentInfos.add(divideStudentInfo);
+        }
+
+
+        DivideTaskInfo task = new DivideTaskInfo();
+        DivideData data = new DivideData();
+        task.setTaskId("asdoi2oi13o12312");
+        task.setBalanceSex(true);
+        task.setMaxNumber(50);
+        //task.setAvarageScore(true);
+
+        List<DivideStudentDataDetail> list = new ArrayList<>();
+
+
+        DivideStudentDataDetail i = new DivideStudentDataDetail();
+        i.setLevel(1);
+        i.setStudents(studentInfos);
+
+        list.add(i);
+        List<NewDivideDetailRsDto> list1 = null;
+        try {
+            //开始分班
+            list1 = NewDivideClass.start(task, list);
+        } catch (Exception ex) {
+
+        }
+
+        if (list1 != null) {
+            result.setReturncode(200);
+            result.setMsg("确认学生信息成功!");
+            result.setData(subject);
+        }
+        return result;
     }
 
     @Override

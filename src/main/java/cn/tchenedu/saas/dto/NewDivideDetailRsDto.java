@@ -10,14 +10,16 @@ import java.util.Map;
  */
 public class NewDivideDetailRsDto {
 
+    //级别
     private String level;
 
+    //行政班
     private List<DivideResultInfo> xzClass = new ArrayList<>();
 
-
+    //选考班级
     private Map<String, List<DivideResultInfo>> xkClass = new HashMap<>();
 
-
+    //学考班级
     private Map<String, List<DivideResultInfo>> xuekClass = new HashMap<>();
 
 

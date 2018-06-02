@@ -1,112 +1,114 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.baidu.dao.StudentBaseMapper" >
-  <resultMap id="BaseResultMap" type="com.baidu.domain.StudentBase" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="studentCode" property="studentcode" jdbcType="VARCHAR" />
-    <result column="schoolId" property="schoolid" jdbcType="INTEGER" />
-    <result column="grade" property="grade" jdbcType="VARCHAR" />
-    <result column="studentId" property="studentid" jdbcType="BIGINT" />
-    <result column="studentName" property="studentname" jdbcType="VARCHAR" />
-    <result column="sex" property="sex" jdbcType="INTEGER" />
-    <result column="studentLevel" property="studentlevel" jdbcType="VARCHAR" />
-    <result column="enrolYear" property="enrolyear" jdbcType="VARCHAR" />
-    <result column="composeId" property="composeid" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
-    <result column="createDate" property="createdate" jdbcType="BIGINT" />
-    <result column="lastModifier" property="lastmodifier" jdbcType="VARCHAR" />
-    <result column="lastModDate" property="lastmoddate" jdbcType="BIGINT" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.baidu.dao.StudentBaseMapper">
+    <resultMap id="BaseResultMap" type="com.baidu.domain.StudentBase">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="studentCode" property="studentcode" jdbcType="VARCHAR"/>
+        <result column="schoolId" property="schoolid" jdbcType="INTEGER"/>
+        <result column="grade" property="grade" jdbcType="VARCHAR"/>
+        <result column="studentId" property="studentid" jdbcType="BIGINT"/>
+        <result column="studentName" property="studentname" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="studentLevel" property="studentlevel" jdbcType="VARCHAR"/>
+        <result column="enrolYear" property="enrolyear" jdbcType="VARCHAR"/>
+        <result column="composeId" property="composeid" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="publisher" property="publisher" jdbcType="VARCHAR"/>
+        <result column="createDate" property="createdate" jdbcType="BIGINT"/>
+        <result column="lastModifier" property="lastmodifier" jdbcType="VARCHAR"/>
+        <result column="lastModDate" property="lastmoddate" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     id, studentCode, schoolId, grade, studentId, studentName, sex, studentLevel, enrolYear, 
     composeId, status, publisher, createDate, lastModifier, lastModDate
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.baidu.domain.StudentBaseExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    'true' as QUERYID,
-    <include refid="Base_Column_List" />
-    from student_student_base
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from student_student_base
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.baidu.domain.StudentBaseExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        'true' as QUERYID,
+        <include refid="Base_Column_List"/>
+        from student_student_base
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from student_student_base
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from student_student_base
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.baidu.domain.StudentBase" >
+    <insert id="insert" parameterType="com.baidu.domain.StudentBase">
     insert into student_student_base (id, studentCode, schoolId, 
       grade, studentId, studentName, 
       sex, studentLevel, enrolYear, 
@@ -120,232 +122,232 @@
       #{createdate,jdbcType=BIGINT}, #{lastmodifier,jdbcType=VARCHAR}, #{lastmoddate,jdbcType=BIGINT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.baidu.domain.StudentBase" >
-    insert into student_student_base
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="studentcode != null" >
-        studentCode,
-      </if>
-      <if test="schoolid != null" >
-        schoolId,
-      </if>
-      <if test="grade != null" >
-        grade,
-      </if>
-      <if test="studentid != null" >
-        studentId,
-      </if>
-      <if test="studentname != null" >
-        studentName,
-      </if>
-      <if test="sex != null" >
-        sex,
-      </if>
-      <if test="studentlevel != null" >
-        studentLevel,
-      </if>
-      <if test="enrolyear != null" >
-        enrolYear,
-      </if>
-      <if test="composeid != null" >
-        composeId,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="publisher != null" >
-        publisher,
-      </if>
-      <if test="createdate != null" >
-        createDate,
-      </if>
-      <if test="lastmodifier != null" >
-        lastModifier,
-      </if>
-      <if test="lastmoddate != null" >
-        lastModDate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="studentcode != null" >
-        #{studentcode,jdbcType=VARCHAR},
-      </if>
-      <if test="schoolid != null" >
-        #{schoolid,jdbcType=INTEGER},
-      </if>
-      <if test="grade != null" >
-        #{grade,jdbcType=VARCHAR},
-      </if>
-      <if test="studentid != null" >
-        #{studentid,jdbcType=BIGINT},
-      </if>
-      <if test="studentname != null" >
-        #{studentname,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="studentlevel != null" >
-        #{studentlevel,jdbcType=VARCHAR},
-      </if>
-      <if test="enrolyear != null" >
-        #{enrolyear,jdbcType=VARCHAR},
-      </if>
-      <if test="composeid != null" >
-        #{composeid,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="publisher != null" >
-        #{publisher,jdbcType=VARCHAR},
-      </if>
-      <if test="createdate != null" >
-        #{createdate,jdbcType=BIGINT},
-      </if>
-      <if test="lastmodifier != null" >
-        #{lastmodifier,jdbcType=VARCHAR},
-      </if>
-      <if test="lastmoddate != null" >
-        #{lastmoddate,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.baidu.domain.StudentBaseExample" resultType="java.lang.Integer" >
-    select count(*) from student_student_base
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update student_student_base
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.studentcode != null" >
+    <insert id="insertSelective" parameterType="com.baidu.domain.StudentBase">
+        insert into student_student_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="studentcode != null">
+                studentCode,
+            </if>
+            <if test="schoolid != null">
+                schoolId,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="studentid != null">
+                studentId,
+            </if>
+            <if test="studentname != null">
+                studentName,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="studentlevel != null">
+                studentLevel,
+            </if>
+            <if test="enrolyear != null">
+                enrolYear,
+            </if>
+            <if test="composeid != null">
+                composeId,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="publisher != null">
+                publisher,
+            </if>
+            <if test="createdate != null">
+                createDate,
+            </if>
+            <if test="lastmodifier != null">
+                lastModifier,
+            </if>
+            <if test="lastmoddate != null">
+                lastModDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="studentcode != null">
+                #{studentcode,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolid != null">
+                #{schoolid,jdbcType=INTEGER},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="studentid != null">
+                #{studentid,jdbcType=BIGINT},
+            </if>
+            <if test="studentname != null">
+                #{studentname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="studentlevel != null">
+                #{studentlevel,jdbcType=VARCHAR},
+            </if>
+            <if test="enrolyear != null">
+                #{enrolyear,jdbcType=VARCHAR},
+            </if>
+            <if test="composeid != null">
+                #{composeid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="publisher != null">
+                #{publisher,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=BIGINT},
+            </if>
+            <if test="lastmodifier != null">
+                #{lastmodifier,jdbcType=VARCHAR},
+            </if>
+            <if test="lastmoddate != null">
+                #{lastmoddate,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.baidu.domain.StudentBaseExample" resultType="java.lang.Integer">
+        select count(*) from student_student_base
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update student_student_base
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.studentcode != null">
+                studentCode = #{record.studentcode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.schoolid != null">
+                schoolId = #{record.schoolid,jdbcType=INTEGER},
+            </if>
+            <if test="record.grade != null">
+                grade = #{record.grade,jdbcType=VARCHAR},
+            </if>
+            <if test="record.studentid != null">
+                studentId = #{record.studentid,jdbcType=BIGINT},
+            </if>
+            <if test="record.studentname != null">
+                studentName = #{record.studentname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sex != null">
+                sex = #{record.sex,jdbcType=INTEGER},
+            </if>
+            <if test="record.studentlevel != null">
+                studentLevel = #{record.studentlevel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.enrolyear != null">
+                enrolYear = #{record.enrolyear,jdbcType=VARCHAR},
+            </if>
+            <if test="record.composeid != null">
+                composeId = #{record.composeid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=TINYINT},
+            </if>
+            <if test="record.publisher != null">
+                publisher = #{record.publisher,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createdate != null">
+                createDate = #{record.createdate,jdbcType=BIGINT},
+            </if>
+            <if test="record.lastmodifier != null">
+                lastModifier = #{record.lastmodifier,jdbcType=VARCHAR},
+            </if>
+            <if test="record.lastmoddate != null">
+                lastModDate = #{record.lastmoddate,jdbcType=BIGINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update student_student_base
+        set id = #{record.id,jdbcType=BIGINT},
         studentCode = #{record.studentcode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.schoolid != null" >
         schoolId = #{record.schoolid,jdbcType=INTEGER},
-      </if>
-      <if test="record.grade != null" >
         grade = #{record.grade,jdbcType=VARCHAR},
-      </if>
-      <if test="record.studentid != null" >
         studentId = #{record.studentid,jdbcType=BIGINT},
-      </if>
-      <if test="record.studentname != null" >
         studentName = #{record.studentname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sex != null" >
         sex = #{record.sex,jdbcType=INTEGER},
-      </if>
-      <if test="record.studentlevel != null" >
         studentLevel = #{record.studentlevel,jdbcType=VARCHAR},
-      </if>
-      <if test="record.enrolyear != null" >
         enrolYear = #{record.enrolyear,jdbcType=VARCHAR},
-      </if>
-      <if test="record.composeid != null" >
         composeId = #{record.composeid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null" >
         status = #{record.status,jdbcType=TINYINT},
-      </if>
-      <if test="record.publisher != null" >
         publisher = #{record.publisher,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createdate != null" >
         createDate = #{record.createdate,jdbcType=BIGINT},
-      </if>
-      <if test="record.lastmodifier != null" >
         lastModifier = #{record.lastmodifier,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lastmoddate != null" >
-        lastModDate = #{record.lastmoddate,jdbcType=BIGINT},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update student_student_base
-    set id = #{record.id,jdbcType=BIGINT},
-      studentCode = #{record.studentcode,jdbcType=VARCHAR},
-      schoolId = #{record.schoolid,jdbcType=INTEGER},
-      grade = #{record.grade,jdbcType=VARCHAR},
-      studentId = #{record.studentid,jdbcType=BIGINT},
-      studentName = #{record.studentname,jdbcType=VARCHAR},
-      sex = #{record.sex,jdbcType=INTEGER},
-      studentLevel = #{record.studentlevel,jdbcType=VARCHAR},
-      enrolYear = #{record.enrolyear,jdbcType=VARCHAR},
-      composeId = #{record.composeid,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=TINYINT},
-      publisher = #{record.publisher,jdbcType=VARCHAR},
-      createDate = #{record.createdate,jdbcType=BIGINT},
-      lastModifier = #{record.lastmodifier,jdbcType=VARCHAR},
-      lastModDate = #{record.lastmoddate,jdbcType=BIGINT}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.baidu.domain.StudentBase" >
-    update student_student_base
-    <set >
-      <if test="studentcode != null" >
-        studentCode = #{studentcode,jdbcType=VARCHAR},
-      </if>
-      <if test="schoolid != null" >
-        schoolId = #{schoolid,jdbcType=INTEGER},
-      </if>
-      <if test="grade != null" >
-        grade = #{grade,jdbcType=VARCHAR},
-      </if>
-      <if test="studentid != null" >
-        studentId = #{studentid,jdbcType=BIGINT},
-      </if>
-      <if test="studentname != null" >
-        studentName = #{studentname,jdbcType=VARCHAR},
-      </if>
-      <if test="sex != null" >
-        sex = #{sex,jdbcType=INTEGER},
-      </if>
-      <if test="studentlevel != null" >
-        studentLevel = #{studentlevel,jdbcType=VARCHAR},
-      </if>
-      <if test="enrolyear != null" >
-        enrolYear = #{enrolyear,jdbcType=VARCHAR},
-      </if>
-      <if test="composeid != null" >
-        composeId = #{composeid,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="publisher != null" >
-        publisher = #{publisher,jdbcType=VARCHAR},
-      </if>
-      <if test="createdate != null" >
-        createDate = #{createdate,jdbcType=BIGINT},
-      </if>
-      <if test="lastmodifier != null" >
-        lastModifier = #{lastmodifier,jdbcType=VARCHAR},
-      </if>
-      <if test="lastmoddate != null" >
-        lastModDate = #{lastmoddate,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.baidu.domain.StudentBase" >
+        lastModDate = #{record.lastmoddate,jdbcType=BIGINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.baidu.domain.StudentBase">
+        update student_student_base
+        <set>
+            <if test="studentcode != null">
+                studentCode = #{studentcode,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolid != null">
+                schoolId = #{schoolid,jdbcType=INTEGER},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="studentid != null">
+                studentId = #{studentid,jdbcType=BIGINT},
+            </if>
+            <if test="studentname != null">
+                studentName = #{studentname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="studentlevel != null">
+                studentLevel = #{studentlevel,jdbcType=VARCHAR},
+            </if>
+            <if test="enrolyear != null">
+                enrolYear = #{enrolyear,jdbcType=VARCHAR},
+            </if>
+            <if test="composeid != null">
+                composeId = #{composeid,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="publisher != null">
+                publisher = #{publisher,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                createDate = #{createdate,jdbcType=BIGINT},
+            </if>
+            <if test="lastmodifier != null">
+                lastModifier = #{lastmodifier,jdbcType=VARCHAR},
+            </if>
+            <if test="lastmoddate != null">
+                lastModDate = #{lastmoddate,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.baidu.domain.StudentBase">
     update student_student_base
     set studentCode = #{studentcode,jdbcType=VARCHAR},
       schoolId = #{schoolid,jdbcType=INTEGER},
@@ -388,12 +390,14 @@ left join ${tableName} as c on c.class_grade=d.grade  where c.class_grade_id= ${
 
     </select>
     <!--未选课学生数量-->
-    <select id="selectUnSelect"  resultType="java.lang.Integer" parameterType="java.util.Map" statementType="STATEMENT">
+    <select id="selectUnSelect" resultType="java.lang.Integer" parameterType="java.util.Map" statementType="STATEMENT">
     <![CDATA[
 
 
 
+
 select count(1) from student_student_base  as a  left join  ${tableName} as b on b.class_grade=a.grade where schoolId= ${schoolId}  and b.class_grade_id=${gradeId} and composeId='-' or  composeId is null
+
 
 
 
@@ -405,22 +409,44 @@ select count(1) from student_student_base  as a  left join  ${tableName} as b on
 
 
 
+
 select count(sex) as sNum,sex from student_student_base where schoolId=${schoolId} and grade=(select  class_grade  from ${tableName} where class_grade_id=${gradeId} limit 0,1) group by sex;
+
 
 
         ]]>
 
     </select>
     <!--获取班级分组-->
-    <select id="selectClassGroup" resultType="java.util.Map"  parameterType="java.util.Map" statementType="STATEMENT">
+    <select id="selectClassGroup" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT">
         <![CDATA[
+
 
 
     select class_group as name from ${tableName}  group by class_group
 
 
 
+
         ]]>
 
     </select>
+    <!--获取所有学生信息以及分数-->
+    <select id="selectAllStudentAndScore" resultType="java.util.Map" parameterType="java.util.Map"
+           >
+        <![CDATA[
+
+
+select  a.studentCode,a.sex,a.composeId,a.studentLevel as  level,b.wuLiScore as wlScore ,b.huaXueScore as hxScore,
+b.shengWuScore as swScore,b.zhengZhiScore as zzScore,b.liShiScore as lsScore ,b.diLiScore as dlScore,b.jiShuScore as jsScore
+ from  student_student_base as a  left join score_score_detail as b
+on  b.studentId=a.studentId
+  where  b.schoolId=#{schoolId,jdbcType=BIGINT}  and a.grade=#{gradeName,jdbcType=VARCHAR}
+
+
+        ]]>
+
+    </select>
+
+
 </mapper>

@@ -67,4 +67,11 @@ public interface StudentBaseMapper {
      * @return
      */
     List<String> selectClassGroup(Map<String,Object> map);//String tableName);
+
+    /**
+     * 根据学校Id和年级名称获取所有学生的信息和成绩
+     * @param map
+     * @return
+     */
+    List<Map<String, Object>> selectAllStudentAndScore(Map<String,Object> map);
 }

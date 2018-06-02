@@ -30,18 +30,27 @@ public interface StudentBaseService {
     int selectUnSelect(int schoolId, int gradeId, String tableName);
 
     /**
-     *查询学生人数及男女比比例
-     * @param schoolId 学校Id
-     * @param gradeId 年级Id
-     * @param tableName  saas_75_class_excel
+     * 查询学生人数及男女比比例
+     *
+     * @param schoolId  学校Id
+     * @param gradeId   年级Id
+     * @param tableName saas_75_class_excel
      * @return
      */
     List<Map<String, Object>> selectStudentInfo(int schoolId, int gradeId, String tableName);
 
     /**
      * 获取班级组
+     *
      * @param tableName
      * @return
      */
-    List<String> selectClassGroup( String tableName);
+    List<String> selectClassGroup(String tableName);
+
+    /**
+     * 根据学校Id和年级名称获取所有学生的信息和成绩
+     * @param map
+     * @return
+     */
+    List<Map<String, Object>> selectAllStudentAndScore(int schoolId,String gradeName);
 }

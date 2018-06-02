@@ -3,7 +3,7 @@ package cn.tchenedu.saas.dto;
 /**
  * Created by ckzhang on 2017/9/23.
  */
-public class DivideStudentInfo {
+    public class DivideStudentInfo {
 
     // 总成绩
     private double score;

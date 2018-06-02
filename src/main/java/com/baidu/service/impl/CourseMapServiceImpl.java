@@ -1,11 +1,7 @@
 package com.baidu.service.impl;
 
 import com.baidu.dao.CourseMapMapper;
-import com.baidu.dao.UserInfoMapper;
-import com.baidu.domain.UserInfo;
-import com.baidu.event.UserRegisterEvent;
 import com.baidu.service.CourseMapService;
-import com.baidu.service.UserInfoService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

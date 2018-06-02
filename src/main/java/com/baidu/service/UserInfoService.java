@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface UserInfoService {
     int insertSelective(UserInfo record);
+
     List<UserInfo> selectByUsername(String username);
 }

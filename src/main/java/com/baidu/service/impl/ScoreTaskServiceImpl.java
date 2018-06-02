@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by lt on 18/5/15.
  */
 @Service
-public class ScoreTaskServiceImpl implements ScoreTaskService,ApplicationContextAware {
+public class ScoreTaskServiceImpl implements ScoreTaskService, ApplicationContextAware {
     @Autowired
     private ScoreTaskMapper scoreTaskMapper;
 
@@ -30,6 +30,7 @@ public class ScoreTaskServiceImpl implements ScoreTaskService,ApplicationContext
         map.put("gradeYearId", gradeYearId);
         return scoreTaskMapper.selectExamResults(map);
     }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 

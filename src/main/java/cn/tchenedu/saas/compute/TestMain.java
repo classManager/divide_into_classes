@@ -1,7 +1,12 @@
 package cn.tchenedu.saas.compute;
 
-import cn.tchenedu.saas.compute.deduction.customize.utils.SubjectMap;
-import cn.tchenedu.saas.dto.*;
+import cn.tchenedu.saas.dto.DivideData;
+import cn.tchenedu.saas.dto.DivideStudentDataDetail;
+import cn.tchenedu.saas.dto.DivideStudentInfo;
+import cn.tchenedu.saas.dto.DivideTaskInfo;
+import cn.tchenedu.saas.dto.NewDivideDetailRsDto;
+import com.baidu.service.StudentBaseService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +15,17 @@ import java.util.List;
  * Created by ckzhang on 2017/9/26.
  */
 public class TestMain {
+    @Autowired
+    private StudentBaseService studentBaseService;
 
-    public static void main(String a[] ) throws Exception {
-
-
+    public static void main(String a[]) throws Exception {
 
         DivideTaskInfo task = new DivideTaskInfo();
         DivideData data = new DivideData();
         task.setTaskId("asdoi2oi13o12312");
         task.setBalanceSex(true);
+        task.setMaxNumber(50);
+        //task.setAvarageScore(true);
 
         List<DivideStudentDataDetail> list = new ArrayList<>();
 
@@ -32,7 +39,8 @@ public class TestMain {
         list.add(i);
 
         List<NewDivideDetailRsDto> list1 = NewDivideClass.start(task, list);
-        System.out.println(list1);
+
+//        System.out.println(list1);
 //
 //        for (String key : SubjectMap.COMPOSE_WEIGHT_MAP.keySet()){
 //            int randomValue = (int)((Math.random() * 192123) % 100);

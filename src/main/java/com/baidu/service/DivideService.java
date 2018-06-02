@@ -1,10 +1,6 @@
 package com.baidu.service;
 
 import com.baidu.util.Result;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by lt on 18/5/12.
@@ -19,7 +15,7 @@ public interface DivideService {
      * @return
      */
 
-    Result ConfirmStudents(int schoolId,int gradeId, String classGroup);
+    Result ConfirmStudents(int schoolId, int gradeId, String classGroup);
 
     /**
      * 根据年级Id获取班级列表
@@ -28,4 +24,12 @@ public interface DivideService {
      * @return
      */
     Result getClassList(int gradeId, int schoolId);
+
+    /**
+     * 分班
+     * @param schoolId
+     * @param gradeName
+     * @return
+     */
+    Result divideClass(int schoolId,String gradeName);
 }

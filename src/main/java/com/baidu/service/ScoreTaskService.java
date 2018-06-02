@@ -8,10 +8,9 @@ import java.util.Map;
  */
 public interface ScoreTaskService {
     /**
-     *
-     * @param schoolId  学校Id
+     * @param schoolId    学校Id
      * @param gradeYearId 年级id
      * @return
      */
-    List<Map<String,Object>> selectExamResults(int schoolId,int gradeYearId);
+    List<Map<String, Object>> selectExamResults(int schoolId, int gradeYearId);
 }

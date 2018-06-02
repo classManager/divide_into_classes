@@ -9,7 +9,8 @@ import java.util.Map;
 public interface CourseMapService {
     /**
      * 查询单个课程和对应的报名人数
-     * @param tableName  saas_75_student_excel
+     *
+     * @param tableName saas_75_student_excel
      * @return
      */
     List<Map<String, Object>> selectNumberOfSubject(String tableName);

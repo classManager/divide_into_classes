@@ -5,12 +5,13 @@ package cn.tchenedu.saas.dto;
  */
 public class DivideTaskInfo {
 
+    //任务ID
     private String taskId;
-
+    //平均分
     private boolean isAvarageScore;
-
+    //男女比例均衡
     private boolean isBalanceSex;
-
+    // 班级最大人数
     private int maxNumber;
 
     public String getTaskId() {

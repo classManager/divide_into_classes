@@ -1,7 +1,6 @@
 package com.baidu.service.impl;
 
 import com.baidu.dao.StudentBaseMapper;
-import com.baidu.dao.UserInfoMapper;
 import com.baidu.service.StudentBaseService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,6 +88,18 @@ public class StudentBaseServiceImpl implements StudentBaseService, ApplicationCo
         return studentBaseMapper.selectClassGroup(map);
     }
 
+    /**
+     * 根据学校Id和年级名称获取所有学生的信息和成绩
+     * @param schoolId
+     * @param gradeName
+     * @return
+     */
+   public  List<Map<String, Object>> selectAllStudentAndScore(int schoolId,String gradeName){
+       Map<String, Object> map = new HashMap<String, Object>();
+       map.put("schoolId", schoolId);
+       map.put("gradeName", gradeName);
+       return studentBaseMapper.selectAllStudentAndScore(map);
+    }
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 
