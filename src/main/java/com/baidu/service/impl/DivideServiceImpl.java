@@ -1,11 +1,11 @@
 package com.baidu.service.impl;
 
-import cn.tchenedu.saas.compute.NewDivideClass;
-import cn.tchenedu.saas.dto.DivideData;
-import cn.tchenedu.saas.dto.DivideStudentDataDetail;
-import cn.tchenedu.saas.dto.DivideStudentInfo;
-import cn.tchenedu.saas.dto.DivideTaskInfo;
-import cn.tchenedu.saas.dto.NewDivideDetailRsDto;
+import com.baidu.dao.compute.NewDivideClass;
+import com.baidu.domain.dto.DivideData;
+import com.baidu.domain.dto.DivideStudentDataDetail;
+import com.baidu.domain.dto.DivideStudentInfo;
+import com.baidu.domain.dto.DivideTaskInfo;
+import com.baidu.domain.dto.NewDivideDetailRsDto;
 import com.baidu.domain.ClassInfo;
 import com.baidu.service.ClassInfoService;
 import com.baidu.service.CourseMapService;
