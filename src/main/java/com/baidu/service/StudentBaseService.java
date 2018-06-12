@@ -1,5 +1,7 @@
 package com.baidu.service;
 
+import com.baidu.domain.SaasStudentExcel;
+
 import java.util.List;
 import java.util.Map;
 
@@ -53,4 +55,35 @@ public interface StudentBaseService {
      * @return
      */
     List<Map<String, Object>> selectAllStudentAndScore(int schoolId,String gradeName);
+
+    /**
+     * 根据学校Id和年级名称获取所有的组合Id和学生选择数量
+     * @param schoolId
+     * @param gradeName
+     * @return
+     */
+    List<Map<String, Object>> selectAllComposeAndNum(int schoolId,String gradeName);
+
+    /**
+     * 定二
+     * @param checkMajor1
+     * @param checkMajor2
+     * @return
+     */
+    List<SaasStudentExcel> selectBySecondCheckMajor(String checkMajor1,String checkMajor2);
+
+    /**
+     * 定三
+     * @param checkMajor1
+     * @param checkMajor2
+     * @param checkMajor3
+     * @return
+     */
+    List<SaasStudentExcel> selectByThreeCheckMajor(String checkMajor1,String checkMajor2,String checkMajor3);
+
+    /**
+     * 获取所有学生信息
+     * @return
+     */
+    List<SaasStudentExcel> selectAlltudent();
 }

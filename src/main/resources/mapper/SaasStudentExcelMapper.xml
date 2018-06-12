@@ -394,32 +394,41 @@
     <select id="selectByThreeCheckMajor" resultType="java.util.Map" parameterType="java.util.Map" >
         select
         <include refid="Base_Column_List"/>
-        from ${tableName}
+        from saas_88_student_excel
         where (
-        student_check_major1= ${checkMajor1}
-        OR student_check_major2 = ${checkMajor1}
-        OR student_check_major3 = ${checkMajor1}) and (
-        student_check_major1= ${checkMajor2}
-        OR student_check_major2 = ${checkMajor2}
-        OR student_check_major3 = ${checkMajor2})
+        student_check_major1= #{checkMajor1}
+        OR student_check_major2 = #{checkMajor1}
+        OR student_check_major3 = #{checkMajor1}) and (
+        student_check_major1= #{checkMajor2}
+        OR student_check_major2 = #{checkMajor2}
+        OR student_check_major3 = #{checkMajor2})
         and (
-        student_check_major1= ${checkMajor3}
-        OR student_check_major2 = ${checkMajor3}
-        OR student_check_major3 = ${checkMajor3})
+        student_check_major1= #{checkMajor3}
+        OR student_check_major2 = #{checkMajor3}
+        OR student_check_major3 = #{checkMajor3})
 
     </select>
-    <!--定儿-->
+    <!--定二-->
     <select id="selectBySecondCheckMajor" resultType="java.util.Map" parameterType="java.util.Map" >
         select
         <include refid="Base_Column_List"/>
-        from ${tableName}
+        from saas_88_student_excel
         where (
-        student_check_major1= ${checkMajor1}
-        OR student_check_major2 = ${checkMajor1}
-        OR student_check_major3 =${checkMajor1}) and (
-        student_check_major1= ${checkMajor2}
-        OR student_check_major2 = ${checkMajor2}
-        OR student_check_major3 = ${checkMajor2})
+        student_check_major1= #{checkMajor1}
+        OR student_check_major2 = #{checkMajor1}
+        OR student_check_major3 =#{checkMajor1}) and (
+        student_check_major1= #{checkMajor2}
+        OR student_check_major2 = #{checkMajor2}
+        OR student_check_major3 = #{checkMajor2})
+
+    </select>
+
+    <!--所有学生-->
+    <select id="selectAlltudent" resultType="java.util.Map" statementType="STATEMENT">
+        select
+        <include refid="Base_Column_List"/>
+        from saas_88_student_excel
+
 
     </select>
 </mapper>

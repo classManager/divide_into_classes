@@ -75,27 +75,27 @@ public class ComposeUtil {
     public static void main(String[] args) {
 
         //输出N选二的结果
-//        Set re = new TesCompose().printArrayCom();
-//
-//        Iterator it = re.iterator();
-//
-//        while (it.hasNext()) {
-//
-//            String arr[] = (String[]) it.next();
-//
-//            System.out.println(arr[0] + " ," + arr[1]);
-//
-//        }
-        //输出N选三的结果
-        Set re = new ComposeUtil().threeArrayCom(array);
-        System.out.println(re.size());
+        Set re =new ComposeUtil().printArrayCom(array);
+
         Iterator it = re.iterator();
+
         while (it.hasNext()) {
 
             String arr[] = (String[]) it.next();
 
-            System.out.println(arr[0] + " ," + arr[1]+ " ," + arr[2]);
+            System.out.println(arr[0] + " ," + arr[1]);
 
         }
+        //输出N选三的结果
+//        Set re = new ComposeUtil().threeArrayCom(array);
+//        System.out.println(re.size());
+//        Iterator it = re.iterator();
+//        while (it.hasNext()) {
+//
+//            String arr[] = (String[]) it.next();
+//
+//            System.out.println(arr[0] + " ," + arr[1]+ " ," + arr[2]);
+//
+//        }
     }
 }

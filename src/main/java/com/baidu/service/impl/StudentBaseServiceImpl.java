@@ -1,6 +1,8 @@
 package com.baidu.service.impl;
 
+import com.baidu.dao.SaasStudentExcelMapper;
 import com.baidu.dao.StudentBaseMapper;
+import com.baidu.domain.SaasStudentExcel;
 import com.baidu.service.StudentBaseService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ import java.util.Map;
 public class StudentBaseServiceImpl implements StudentBaseService, ApplicationContextAware {
     @Autowired
     private StudentBaseMapper studentBaseMapper;
+
+    @Autowired
+    private SaasStudentExcelMapper saasStudentExcelMapper;
 
     /**
      * 获取组合课程及对应的报名人数
@@ -90,16 +95,66 @@ public class StudentBaseServiceImpl implements StudentBaseService, ApplicationCo
 
     /**
      * 根据学校Id和年级名称获取所有学生的信息和成绩
+     *
      * @param schoolId
      * @param gradeName
      * @return
      */
-   public  List<Map<String, Object>> selectAllStudentAndScore(int schoolId,String gradeName){
-       Map<String, Object> map = new HashMap<String, Object>();
-       map.put("schoolId", schoolId);
-       map.put("gradeName", gradeName);
-       return studentBaseMapper.selectAllStudentAndScore(map);
+    @Override
+    public List<Map<String, Object>> selectAllStudentAndScore(int schoolId, String gradeName) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("schoolId", schoolId);
+        map.put("gradeName", gradeName);
+        return studentBaseMapper.selectAllStudentAndScore(map);
     }
+
+    @Override
+    public List<Map<String, Object>> selectAllComposeAndNum(int schoolId, String gradeName) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("schoolId", schoolId);
+        map.put("gradeName", gradeName);
+        return studentBaseMapper.selectAllComposeAndNum(map);
+    }
+
+    /**
+     * 定二
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public List<SaasStudentExcel> selectBySecondCheckMajor(String checkMajor1, String checkMajor2) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("checkMajor1", checkMajor1);
+        map.put("checkMajor2", checkMajor2);
+        return saasStudentExcelMapper.selectBySecondCheckMajor(map);
+    }
+
+    /**
+     * 定三
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public List<SaasStudentExcel> selectByThreeCheckMajor(String checkMajor1, String checkMajor2, String checkMajor3) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("checkMajor1", checkMajor1);
+        map.put("checkMajor2", checkMajor2);
+        map.put("checkMajor3", checkMajor3);
+        return saasStudentExcelMapper.selectByThreeCheckMajor(map);
+    }
+
+    /**
+     * 获取所有学生信息
+     *
+     * @return
+     */
+    @Override
+    public List<SaasStudentExcel> selectAlltudent() {
+        return saasStudentExcelMapper.selectAlltudent();
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 

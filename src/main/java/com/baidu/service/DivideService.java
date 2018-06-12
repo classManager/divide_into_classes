@@ -32,4 +32,7 @@ public interface DivideService {
      * @return
      */
     Result divideClass(int schoolId,String gradeName);
+
+    Result divideSecondClass(int schoolId,String gradeName,String[] Subject);
+
 }

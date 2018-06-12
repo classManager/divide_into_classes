@@ -74,4 +74,12 @@ public interface StudentBaseMapper {
      * @return
      */
     List<Map<String, Object>> selectAllStudentAndScore(Map<String,Object> map);
+    /**
+     * 根据学校Id和年级名称获取所有组合ID和选择人数
+     * @param map
+     * @return
+     */
+    List<Map<String, Object>> selectAllComposeAndNum(Map<String,Object> map);
+
+
 }

@@ -1,174 +1,1 @@
-package com.baidu.service.impl;
-
-import com.baidu.dao.compute.NewDivideClass;
-import com.baidu.domain.dto.DivideData;
-import com.baidu.domain.dto.DivideStudentDataDetail;
-import com.baidu.domain.dto.DivideStudentInfo;
-import com.baidu.domain.dto.DivideTaskInfo;
-import com.baidu.domain.dto.NewDivideDetailRsDto;
-import com.baidu.domain.ClassInfo;
-import com.baidu.service.ClassInfoService;
-import com.baidu.service.CourseMapService;
-import com.baidu.service.DivideService;
-import com.baidu.service.ScoreTaskService;
-import com.baidu.service.StudentBaseService;
-import com.baidu.util.Result;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-/**
- * ApplicationEventPublisherAware是由Spring提供的用于为Service注入ApplicationEventPublisher事件发布器的接口，
- * 使用这个接口，我们自己的Service就拥有了发布事件的能力。
- * Created by lt on 18/5/15.
- */
-@Service
-public class DivideServiceImpl implements DivideService, ApplicationContextAware {
-    @Autowired
-    private ScoreTaskService scoreTaskService;
-    @Autowired
-    private StudentBaseService studentBaseService;
-    @Autowired
-    private CourseMapService courseMapService;
-    @Autowired
-    private ClassInfoService classInfoService;
-
-
-    @Override
-    public Result ConfirmStudents(int schoolId, int gradeId, String classGroup) {
-        Result result = new Result();
-        result.setReturncode(-1);
-        Map<String, Object> mapres = new HashMap<String, Object>();
-        if (schoolId == 0) {
-            result.setMsg("学校Id不能为空");
-            return result;
-        }
-        if (gradeId == 0) {
-            result.setMsg("年级Id不能为空");
-            return result;
-        }
-        String classTable = "saas_" + schoolId + "_class_excel";//班级表
-        String studentTable = "saas_" + schoolId + "_student_excel"; //学生表
-        //单科成绩及人数
-        List<Map<String, Object>> subject = courseMapService.selectNumberOfSubject(studentTable);
-        //组合课程及人数
-        List<Map<String, Object>> groupClass = studentBaseService.selectGroupClass(schoolId, gradeId, classGroup, classTable);
-        //成绩列表
-        List<Map<String, Object>> achievementList = scoreTaskService.selectExamResults(schoolId, gradeId);
-        //未选课人数
-        int unSelect = studentBaseService.selectUnSelect(schoolId, gradeId, classTable);
-        //学生总人数以及男女比例
-        List<Map<String, Object>> studentNum = studentBaseService.selectStudentInfo(schoolId, gradeId, classTable);
-
-        int totle = 0;
-        if (studentNum != null && studentNum.size() > 0) {
-            for (Map<String, Object> map : studentNum) {
-                if (map.get("sex").equals(0)) {
-                    mapres.put("grilsNum", map.get("sNum"));
-                }
-                if (map.get("sex").equals(1)) {
-                    mapres.put("boysNum", map.get("sNum"));
-                }
-                totle += Integer.valueOf(map.get("sNum").toString());
-            }
-        }
-        //获取班级分组
-        List<String> grade = studentBaseService.selectClassGroup(classTable);
-        mapres.put("totle", totle);
-        mapres.put("unSelectNum", unSelect);
-        mapres.put("grade", grade);
-        mapres.put("groupClass", groupClass);
-        mapres.put("subject", subject);
-        mapres.put("achievementList", achievementList);
-
-        if (mapres != null) {
-            result.setReturncode(200);
-            result.setMsg("班级列表获取成功!");
-            result.setData(mapres);
-        }
-        return result;
-    }
-
-    @Override
-    public Result getClassList(int gradeId, int schoolId) {
-
-        String classTable = "saas_" + schoolId + "_class_excel";//班级表
-        Result result = new Result();
-        result.setReturncode(-1);
-        List<ClassInfo> subject = classInfoService.getClassList(gradeId, classTable);
-        if (subject != null) {
-            result.setReturncode(200);
-            result.setMsg("确认学生信息成功!");
-            result.setData(subject);
-        }
-        return result;
-
-    }
-
-    @Override
-    public Result divideClass(int schoolId, String gradeName) {
-        Result result = new Result();
-        result.setReturncode(-1);
-
-        List<DivideStudentInfo> studentInfos = new ArrayList<>();
-        List<Map<String, Object>> subject = studentBaseService.selectAllStudentAndScore(schoolId, gradeName);
-        for (Map<String, Object> mp : subject) {
-            DivideStudentInfo divideStudentInfo = new DivideStudentInfo();
-            divideStudentInfo.setComposeId(String.valueOf(mp.get("composeId")));
-            divideStudentInfo.setDlScore(Double.valueOf(mp.get("dlScore").toString()));
-            divideStudentInfo.setLevel(1);//Integer.valueOf(mp.get("level") == null ? "0" : mp.get("level").toString())
-            divideStudentInfo.setWlScore(Double.valueOf(mp.get("wlScore") == null ? "0" : mp.get("wlScore").toString()));
-            divideStudentInfo.setHxScore(Double.valueOf(mp.get("hxScore") == null ? "0" : mp.get("hxScore").toString()));
-            divideStudentInfo.setSwScore(Double.valueOf(mp.get("swScore") == null ? "0" : mp.get("swScore").toString()));
-            divideStudentInfo.setZzScore(Double.valueOf(mp.get("zzScore") == null ? "0" : mp.get("zzScore").toString()));
-            divideStudentInfo.setLsScore(Double.valueOf(mp.get("lsScore") == null ? "0" : mp.get("lsScore").toString()));
-            divideStudentInfo.setJsScore(Double.valueOf(mp.get("jsScore") == null ? "0" : mp.get("jsScore").toString()));
-            divideStudentInfo.setSex(Integer.valueOf(mp.get("sex") == null ? "0" : mp.get("sex").toString()));
-            studentInfos.add(divideStudentInfo);
-        }
-
-
-        DivideTaskInfo task = new DivideTaskInfo();
-        DivideData data = new DivideData();
-        task.setTaskId("asdoi2oi13o12312");
-        task.setBalanceSex(true);
-        task.setMaxNumber(50);
-        //task.setAvarageScore(true);
-
-        List<DivideStudentDataDetail> list = new ArrayList<>();
-
-
-        DivideStudentDataDetail i = new DivideStudentDataDetail();
-        i.setLevel(1);
-        i.setStudents(studentInfos);
-
-        list.add(i);
-        List<NewDivideDetailRsDto> list1 = null;
-        try {
-            //开始分班
-            list1 = NewDivideClass.start(task, list);
-        } catch (Exception ex) {
-
-        }
-
-        if (list1 != null) {
-            result.setReturncode(200);
-            result.setMsg("确认学生信息成功!");
-            result.setData(subject);
-        }
-        return result;
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-
-    }
-
-}
+package com.baidu.service.impl;import com.alibaba.fastjson.JSON;import com.baidu.dao.compute.NewDivideClass;import com.baidu.dao.compute.deduction.customize.CustomizeDeductionCompute;import com.baidu.dao.compute.deduction.dto.DeductionComposeInfoDto;import com.baidu.dao.compute.deduction.dto.DeductionLevelInfoDto;import com.baidu.dao.compute.deduction.dto.DeductionRequestDto;import com.baidu.dao.divide.dto.SecondStudentInfoDto;import com.baidu.domain.SaasStudentExcel;import com.baidu.domain.dto.DivideData;import com.baidu.domain.dto.DivideStudentDataDetail;import com.baidu.domain.dto.DivideStudentInfo;import com.baidu.domain.dto.DivideTaskInfo;import com.baidu.domain.dto.NewDivideDetailRsDto;import com.baidu.domain.ClassInfo;import com.baidu.service.ClassInfoService;import com.baidu.service.CourseMapService;import com.baidu.service.DivideService;import com.baidu.service.ScoreTaskService;import com.baidu.service.StudentBaseService;import com.baidu.util.ComposeUtil;import com.baidu.util.Result;import org.springframework.beans.BeansException;import org.springframework.beans.factory.annotation.Autowired;import org.springframework.context.ApplicationContext;import org.springframework.context.ApplicationContextAware;import org.springframework.stereotype.Service;import java.util.ArrayList;import java.util.Collections;import java.util.Comparator;import java.util.HashMap;import java.util.Iterator;import java.util.List;import java.util.Map;import java.util.Set;import java.util.TreeMap;/** * ApplicationEventPublisherAware是由Spring提供的用于为Service注入ApplicationEventPublisher事件发布器的接口， * 使用这个接口，我们自己的Service就拥有了发布事件的能力。 * Created by lt on 18/5/15. */@Servicepublic class DivideServiceImpl implements DivideService, ApplicationContextAware {    @Autowired    private ScoreTaskService scoreTaskService;    @Autowired    private StudentBaseService studentBaseService;    @Autowired    private CourseMapService courseMapService;    @Autowired    private ClassInfoService classInfoService;    @Override    public Result ConfirmStudents(int schoolId, int gradeId, String classGroup) {        Result result = new Result();        result.setReturncode(-1);        Map<String, Object> mapres = new HashMap<String, Object>();        if (schoolId == 0) {            result.setMsg("学校Id不能为空");            return result;        }        if (gradeId == 0) {            result.setMsg("年级Id不能为空");            return result;        }        String classTable = "saas_" + schoolId + "_class_excel";//班级表        String studentTable = "saas_" + schoolId + "_student_excel"; //学生表        //单科成绩及人数        List<Map<String, Object>> subject = courseMapService.selectNumberOfSubject(studentTable);        //组合课程及人数        List<Map<String, Object>> groupClass = studentBaseService.selectGroupClass(schoolId, gradeId, classGroup, classTable);        //成绩列表        List<Map<String, Object>> achievementList = scoreTaskService.selectExamResults(schoolId, gradeId);        //未选课人数        int unSelect = studentBaseService.selectUnSelect(schoolId, gradeId, classTable);        //学生总人数以及男女比例        List<Map<String, Object>> studentNum = studentBaseService.selectStudentInfo(schoolId, gradeId, classTable);        int totle = 0;        if (studentNum != null && studentNum.size() > 0) {            for (Map<String, Object> map : studentNum) {                if (map.get("sex").equals(0)) {                    mapres.put("grilsNum", map.get("sNum"));                }                if (map.get("sex").equals(1)) {                    mapres.put("boysNum", map.get("sNum"));                }                totle += Integer.valueOf(map.get("sNum").toString());            }        }        //获取班级分组        List<String> grade = studentBaseService.selectClassGroup(classTable);        mapres.put("totle", totle);        mapres.put("unSelectNum", unSelect);        mapres.put("grade", grade);        mapres.put("groupClass", groupClass);        mapres.put("subject", subject);        mapres.put("achievementList", achievementList);        if (mapres != null) {            result.setReturncode(200);            result.setMsg("班级列表获取成功!");            result.setData(mapres);        }        return result;    }    @Override    public Result getClassList(int gradeId, int schoolId) {        String classTable = "saas_" + schoolId + "_class_excel";//班级表        Result result = new Result();        result.setReturncode(-1);        List<ClassInfo> subject = classInfoService.getClassList(gradeId, classTable);        if (subject != null) {            result.setReturncode(200);            result.setMsg("确认学生信息成功!");            result.setData(subject);        }        return result;    }    @Override    public Result divideSecondClass(int schoolId, String gradeName, String[] array) {        Result result = new Result();        result.setReturncode(-1);//        String[] array = {"物理", "化学", "生物", "政治", "历史", "地理"};        Set re = new ComposeUtil().printArrayCom(array);        Iterator it = re.iterator();        Map<String, Long> map = new HashMap<>();        List<SaasStudentExcel> listAll = studentBaseService.selectAlltudent();        while (it.hasNext()) {            String arr[] = (String[]) it.next();            List<SaasStudentExcel> list = studentBaseService.selectBySecondCheckMajor(arr[0], arr[1]);            map.put(arr[0] + "," + arr[1], (long) list.size());        }        ValueComparator valueComparator = new ValueComparator(map);        Map<String, Long> valueSortMap = new TreeMap<>(valueComparator);        valueSortMap.putAll(map);        SecondStudentInfoDto ssid = new SecondStudentInfoDto();        for (int i = valueSortMap.size() - 1; i < valueSortMap.size(); i--) {            for (Map.Entry entry : valueSortMap.entrySet()) {                long val = valueSortMap.get(i);                long gval = (long) entry.getValue();                if (val == gval) {                    String[] key = entry.getKey().toString().split(",");                    List<SaasStudentExcel> list = studentBaseService.selectBySecondCheckMajor(key[0], key[1]);                    ssid.setSubject(entry.getValue().toString());                    ssid.setComposes(list);                    listAll.removeAll(list);                }            }        }        result.setData(ssid);        return result;    }    class ValueComparator implements Comparator<String> {        Map<String, Long> base;        //Comparator外部比较器        public ValueComparator(Map<String, Long> base) {            this.base = base;        }        //根据Map的值进行比较        public int compare(String a, String b) {            return base.get(a).compareTo(base.get(b));        }    }    @Override    public Result divideClass(int schoolId, String gradeName) {        Result result = new Result();        result.setReturncode(-1);        List<DivideStudentInfo> studentInfos = new ArrayList<>();        List<Map<String, Object>> subject = studentBaseService.selectAllStudentAndScore(schoolId, gradeName);        for (Map<String, Object> mp : subject) {            DivideStudentInfo divideStudentInfo = new DivideStudentInfo();            divideStudentInfo.setStudentCode(String.valueOf(mp.get("studentCode")));            divideStudentInfo.setComposeId(String.valueOf(mp.get("composeId")));            divideStudentInfo.setDlScore(Double.valueOf(mp.get("dlScore").toString()));            divideStudentInfo.setLevel(1);//Integer.valueOf(mp.get("level") == null ? "0" : mp.get("level").toString())            divideStudentInfo.setWlScore(Double.valueOf(mp.get("wlScore") == null ? "0" : mp.get("wlScore").toString()));            divideStudentInfo.setHxScore(Double.valueOf(mp.get("hxScore") == null ? "0" : mp.get("hxScore").toString()));            divideStudentInfo.setSwScore(Double.valueOf(mp.get("swScore") == null ? "0" : mp.get("swScore").toString()));            divideStudentInfo.setZzScore(Double.valueOf(mp.get("zzScore") == null ? "0" : mp.get("zzScore").toString()));            divideStudentInfo.setLsScore(Double.valueOf(mp.get("lsScore") == null ? "0" : mp.get("lsScore").toString()));            divideStudentInfo.setJsScore(Double.valueOf(mp.get("jsScore") == null ? "0" : mp.get("jsScore").toString()));            divideStudentInfo.setSex(Integer.valueOf(mp.get("sex") == null ? "0" : mp.get("sex").toString()));            studentInfos.add(divideStudentInfo);        }        List<Map<String, Object>> listAllCompose = studentBaseService.selectAllComposeAndNum(schoolId, gradeName);        List<DeductionLevelInfoDto> dlidList = new ArrayList<>();        List<Map<String, Object>> dataList = listAllCompose;        Map dataItem; // 数据库中查询到的每条记录        Map<String, List<Map>> resultMap = new HashMap<String, List<Map>>(); // 最终要的结果        for (int i = 0; i < dataList.size(); i++) {            dataItem = dataList.get(i);            if (resultMap.containsKey(dataItem.get("studentLevel"))) {                resultMap.get(dataItem.get("studentLevel")).add(dataItem);            } else {                List<Map> list = new ArrayList<Map>();                list.add(dataItem);                resultMap.put(dataItem.get("studentLevel").toString(), list);            }        }        for (String key : resultMap.keySet()) {            List<DeductionComposeInfoDto> dcidList = new ArrayList<>();            DeductionLevelInfoDto dlid = new DeductionLevelInfoDto();            dlid.setLevel(key);            for (Map lm : resultMap.get(key)) {                DeductionComposeInfoDto dcid = new DeductionComposeInfoDto();                dcid.setChooseNumber(Integer.valueOf(lm.get("chooseNumber").toString()));                dcid.setComposeId(lm.get("composeId").toString());                dcidList.add(dcid);            }            dlid.setComposes(dcidList);            dlidList.add(dlid);        }        DeductionRequestDto request = new DeductionRequestDto();        request.setClassMaxNumber(45);        request.setLevelInfos(dlidList);//        request=JSON.parseObject(resultMap.toString(),DeductionRequestDto.class);        CustomizeDeductionCompute cdc = new CustomizeDeductionCompute();        cdc.compute(request);        DivideTaskInfo task = new DivideTaskInfo();        DivideData data = new DivideData();        task.setTaskId("asdoi2oi13o12312");        //task.setBalanceSex(true);        task.setMaxNumber(45);        task.setAvarageScore(true);        List<DivideStudentDataDetail> list = new ArrayList<>();        DivideStudentDataDetail i = new DivideStudentDataDetail();        i.setLevel(2);        i.setStudents(studentInfos);        list.add(i);        List<NewDivideDetailRsDto> list1 = null;        try {            //定三开始分班            list1 = NewDivideClass.start(task, list);            //定二开始分班        } catch (Exception ex) {        }        if (list1 != null) {            result.setReturncode(200);            result.setMsg("分班成功!");            result.setData(list1);        }        return result;    }    @Override    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {    }}

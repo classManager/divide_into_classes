@@ -7,6 +7,7 @@ import com.baidu.service.StudentBaseService;
 import com.baidu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -40,5 +41,10 @@ public class DivideController {
     @GetMapping(value = "/divideClass", produces = "application/json;charset=UTF-8")
     public Result divideClass(int schoolId,String gradeName) throws UserException {
         return divideService.divideClass(schoolId,gradeName);
+    }
+
+    @PostMapping(value = "/divideSecondClass", produces = "application/json;charset=UTF-8")
+    public Result divideSecondClass(int schoolId,String gradeName,String[] Subject) throws UserException {
+        return divideService.divideSecondClass(schoolId,gradeName,Subject);
     }
 }

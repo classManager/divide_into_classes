@@ -172,29 +172,39 @@ public class DeductionCompute implements IDeductionCompute {
         StepRequestDto request1Dto = new StepRequestDto();
         request1Dto.setComposes(composes);
 
+        //步骤一分出来行newCompost:19;xcClass=21,xkclassComposeList:6;xuekClassComposeList:7
         StepResponseDto response1 = step1.compute(request1Dto, maxNumber);
 
         StepRequestDto request2Dto = new StepRequestDto();
         request2Dto.setComposes(response1.getNewCompose());
 
+        //newCompost:19 ;xzclass:14
         StepResponseDto response2 = step2.compute(request2Dto, maxNumber);
 //        StepResponseDto response2 = new StepResponseDto();
 //        response2.setNewCompose(composes);
 //        List<ClassDeduction> xzClass = this.getXzClass();
 //        response2.setXzClass(xzClass);
 
+        //xkclassComposeList:6
         StepResponseDto response3 = step3.compute(response2, maxNumber);
-
+        //xuekClassComposeList :7
         StepResponseDto response4 = step4.compute(response2, maxNumber);
 
-
+//       定三
         response.getXzClass().addAll(response1.getXzClass());
         response.setXkClassComposeList(response1.getXkClassComposeList());
         response.setXuekClassComposeList(response1.getXuekClassComposeList());
 
+        //定二
+//        response.getXzClass().addAll(response2.getXzClass());
+//        response.setXkClassComposeList(response2.getXkClassComposeList());
+//        response.setXuekClassComposeList(response2.getXuekClassComposeList());
 
+
+        //步骤一分出来xzclass:21,步骤二分出来xzclass:14;总共35个
         response.getXzClass().addAll(response2.getXzClass());
 
+        //选考班级
         for (int key : response3.getXkClassComposeList().keySet()){
             List<ClassDeduction> itemList = response.getXkClassComposeList().get(key);
 
@@ -207,6 +217,7 @@ public class DeductionCompute implements IDeductionCompute {
             }
         }
 
+        //学考班级数
         for (int key : response4.getXuekClassComposeList().keySet()){
             List<ClassDeduction> itemList = response.getXuekClassComposeList().get(key);
 
