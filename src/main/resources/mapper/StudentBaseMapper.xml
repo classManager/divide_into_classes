@@ -383,7 +383,7 @@ left join ${tableName} as c on c.class_grade=d.grade  where c.class_grade_id= ${
  ]]>
         <if test="classGroup != null and classGroup != '' ">
             <![CDATA[
-     and class_group= ${classGroup} ;
+     and class_group= ${classGroup}
         ]]>
         </if>
 
@@ -393,17 +393,7 @@ left join ${tableName} as c on c.class_grade=d.grade  where c.class_grade_id= ${
     <select id="selectUnSelect" resultType="java.lang.Integer" parameterType="java.util.Map" statementType="STATEMENT">
     <![CDATA[
 
-
-
-
-
-
 select count(1) from student_student_base  as a  left join  ${tableName} as b on b.class_grade=a.grade where schoolId= ${schoolId}  and b.class_grade_id=${gradeId} and composeId='-' or  composeId is null
-
-
-
-
-
 
         ]]>
     </select>
@@ -411,16 +401,7 @@ select count(1) from student_student_base  as a  left join  ${tableName} as b on
     <select id="selectStudentInfo" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT">
         <![CDATA[
 
-
-
-
-
-
 select count(sex) as sNum,sex from student_student_base where schoolId=${schoolId} and grade=(select  class_grade  from ${tableName} where class_grade_id=${gradeId} limit 0,1) group by sex;
-
-
-
-
 
         ]]>
 
@@ -429,16 +410,7 @@ select count(sex) as sNum,sex from student_student_base where schoolId=${schoolI
     <select id="selectClassGroup" resultType="java.util.Map" parameterType="java.util.Map" statementType="STATEMENT">
         <![CDATA[
 
-
-
-
-
     select class_group as name from ${tableName}  group by class_group
-
-
-
-
-
 
         ]]>
 
@@ -448,16 +420,11 @@ select count(sex) as sNum,sex from student_student_base where schoolId=${schoolI
     >
         <![CDATA[
 
-
-
-
 select  a.studentCode,a.sex,a.composeId,a.studentLevel as  level,b.wuLiScore as wlScore ,b.huaXueScore as hxScore,
 b.shengWuScore as swScore,b.zhengZhiScore as zzScore,b.liShiScore as lsScore ,b.diLiScore as dlScore,b.jiShuScore as jsScore
  from  student_student_base as a  left join score_score_detail as b
 on  b.studentId=a.studentId
   where  b.schoolId=#{schoolId,jdbcType=BIGINT}  and a.grade=#{gradeName,jdbcType=VARCHAR}
-
-
 
 
         ]]>
@@ -469,8 +436,10 @@ on  b.studentId=a.studentId
         <![CDATA[
 
 
+
 select composeId,studentLevel,count(id) as chooseNumber from student_student_base
 where schoolId=#{schoolId,jdbcType=BIGINT}  and grade=#{gradeName,jdbcType=VARCHAR}  group by studentLevel,composeId
+
 
 
         ]]>

@@ -6,6 +6,7 @@ import com.baidu.domain.ClassInfoExample;
 import java.util.List;
 import java.util.Map;
 
+import com.baidu.domain.parm.QueryGradeParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,5 +31,5 @@ public interface ClassInfoMapper {
     int updateByPrimaryKeySelective(ClassInfo record);
 
     int updateByPrimaryKey(ClassInfo record);
-    List<ClassInfo> getClassList(Map<String,Object> map);
+    List<ClassInfo> getClassList(QueryGradeParam param);
 }

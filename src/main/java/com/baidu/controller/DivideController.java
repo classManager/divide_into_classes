@@ -1,6 +1,7 @@
 package com.baidu.controller;
 
 import com.baidu.config.ThirdpartConfig;
+import com.baidu.domain.parm.QueryGradeParam;
 import com.baidu.exception.UserException;
 import com.baidu.service.DivideService;
 import com.baidu.service.StudentBaseService;
@@ -8,6 +9,7 @@ import com.baidu.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -29,16 +31,29 @@ public class DivideController {
     private ThirdpartConfig thirdpartConfig;
 
 
-    @GetMapping(value = "/confirmStudents", produces = "application/json;charset=UTF-8")
-    public Result confirmStudents(int schoolId, int gradeId, String classGroup) throws UserException {
-        return divideService.ConfirmStudents(schoolId, gradeId, classGroup);
+    /**
+     * 获取班级学生信息
+     * @param schoolId
+     * @param gradeId
+     * @param classGroup
+     * @return
+     * @throws UserException
+     */
+    @PostMapping(value = "/confirmStudents", produces = "application/json;charset=UTF-8")
+    public Result confirmStudents(@RequestBody QueryGradeParam param) throws UserException {
+        return divideService.ConfirmStudents(param);
     }
 
-    @GetMapping(value = "/getClassList", produces = "application/json;charset=UTF-8")
-    public Result getClassList(int gradeId, int schoolId) throws UserException {
-        return divideService.getClassList(gradeId, schoolId);
+    /**
+     * 获取班级列表
+     * @return
+     * @throws UserException
+     */
+    @PostMapping(value = "/getClassList", produces = "application/json;charset=UTF-8")
+    public Result getClassList(@RequestBody QueryGradeParam param) throws UserException {
+        return divideService.getClassList(param);
     }
-    @GetMapping(value = "/divideClass", produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "/divideClass", produces = "application/json;charset=UTF-8")
     public Result divideClass(int schoolId,String gradeName) throws UserException {
         return divideService.divideClass(schoolId,gradeName);
     }

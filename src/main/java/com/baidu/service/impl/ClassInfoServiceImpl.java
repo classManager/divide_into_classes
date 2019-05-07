@@ -2,6 +2,7 @@ package com.baidu.service.impl;
 
 import com.baidu.dao.ClassInfoMapper;
 import com.baidu.domain.ClassInfo;
+import com.baidu.domain.parm.QueryGradeParam;
 import com.baidu.service.ClassInfoService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,8 @@ public class ClassInfoServiceImpl implements ClassInfoService, ApplicationContex
      * @return
      */
     @Override
-    public List<ClassInfo> getClassList(int gradeId, String tableName) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("gradeId", gradeId);
-        map.put("tableName", tableName);
-        return classInfoMapper.getClassList(map);
+    public List<ClassInfo> getClassList(QueryGradeParam param) {
+        return classInfoMapper.getClassList(param);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.baidu.service;
 
+import com.baidu.domain.parm.QueryGradeParam;
 import com.baidu.util.Result;
 
 /**
@@ -15,15 +16,15 @@ public interface DivideService {
      * @return
      */
 
-    Result ConfirmStudents(int schoolId, int gradeId, String classGroup);
+    Result ConfirmStudents(QueryGradeParam param);
 
     /**
      * 根据年级Id获取班级列表
      *
-     * @param gradeId 年级Id
+     * @param param 年级Id
      * @return
      */
-    Result getClassList(int gradeId, int schoolId);
+    Result getClassList(QueryGradeParam param);
 
     /**
      * 分班

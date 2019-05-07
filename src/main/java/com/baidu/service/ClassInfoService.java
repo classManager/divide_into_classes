@@ -1,6 +1,7 @@
 package com.baidu.service;
 
 import com.baidu.domain.ClassInfo;
+import com.baidu.domain.parm.QueryGradeParam;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface ClassInfoService {
      * @param gradeId 年级Id
      * @return
      */
-    List<ClassInfo> getClassList(int gradeId, String tableName);
+    List<ClassInfo> getClassList(QueryGradeParam param);
 }
